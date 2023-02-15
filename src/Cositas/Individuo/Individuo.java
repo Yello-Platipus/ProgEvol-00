@@ -1,4 +1,4 @@
-package Cositas;
+package Cositas.Individuo;
 
 import java.util.Random;
 
