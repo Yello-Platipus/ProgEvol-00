@@ -1,7 +1,5 @@
 package Cositas;
 
-import Cositas.Individuo.Individuo;
-
 public class AlgoritmoGenetico {
 	private int tamPoblacion;
 	private Individuo[] poblacion;
@@ -9,6 +7,7 @@ public class AlgoritmoGenetico {
 	private int maxGeneraciones;
 	private double probCruce;
 	private double probMutacion;
+
 	private int tamTorneo;
 	private Individuo elMejor;
 	private int pos_mejor;
@@ -21,7 +20,9 @@ public class AlgoritmoGenetico {
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
 	}
-	
-	//TODO
+	void evaluarPoblacion(){
+
+
+	}
 
 }
