@@ -8,21 +8,22 @@ import Cositas.Seleccion.Seleccion;
 import Cositas.Seleccion.SeleccionRuleta;
 
 public class Controller {
-    public Individuo run() {
-        AlgoritmoGenetico ag = new AlgoritmoGenetico(100, 100, 0.7, 0.001);
+    public void run() {
+        AlgoritmoGenetico ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
         Seleccion sel = new SeleccionRuleta(100);
         Cruce cruce = new CruceMonopunto();
         ag.initPob();
         ag.evalPob();
-        int g = 0 ;
+        int g = 2 ;
         int i = 0;
         while(i < g) {
             ag.selPob(sel);
             ag.cruzPob(cruce);
             ag.mutPob();
-            //evaluar poblacion
+            ag.evalPob();
+            i++;
         }
         //devolver mejor
-        return null;
+         ag.getMejor();
     }
 }

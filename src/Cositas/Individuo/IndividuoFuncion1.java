@@ -38,10 +38,19 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 	}
 
 	public double getFenotipo(int x) {
-		return this.min[x] + Converter.bin2dec(cromosoma, tamGenes, x)*(this.max[x] - this.min[x])/(Math.pow(2,cromosoma.length) - 1);
+		return this.min[x] + Converter.bin2dec(cromosoma, tamGenes, x)*(this.max[x] - this.min[x])/(Math.pow(2,tamGenes[x]) - 1);
 	}
 
 	public void mutar(double probMutacion){
-		//TODO
+		boolean cambios = false;
+		for(int i = 0; i < cromosoma.length; i++){
+			if(rand.nextDouble() < probMutacion){
+				cromosoma[i] = rand.nextBoolean();
+				cambios = true;
+			}
+		}
+		if(cambios){
+			//TODO refrescar fenotipo
+		}
 	}
 }

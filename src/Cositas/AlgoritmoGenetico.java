@@ -16,14 +16,16 @@ public class AlgoritmoGenetico {
 	private int tamTorneo;
 	private Individuo elMejor;
 	private int pos_mejor;
-	
+	private double elitismo;
+	private Individuo elite[];
 	//TODO
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones,
-			double probCruce, double probMutacion) {
+			double probCruce, double probMutacion, double elitismo) {
 		this.tamPoblacion = tamPoblacion;
 		this.maxGeneraciones = maxGeneraciones;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
+		this.elitismo = elitismo;
 	}
 	public void evalPob(){
 		this.fitness = new double[this.tamPoblacion];
@@ -35,6 +37,7 @@ public class AlgoritmoGenetico {
 				this.elMejor = this.poblacion[i];
 				this.pos_mejor = i;
 			}
+			getMejor();
 		}
 	}
 
@@ -63,4 +66,13 @@ public class AlgoritmoGenetico {
 		}
 	}
 
+	public void getMejor() { System.out.println("El mejor tiene un maximo de " + poblacion[pos_mejor].getFitness() + " " + poblacion[pos_mejor].getFenotipo(0) + " " + poblacion[pos_mejor].getFenotipo(1));}
+
+	public void generarElite(){
+		int numElite = (int)elitismo*tamPoblacion;
+		elite = new Individuo[numElite];
+		for(int i = 0; i < numElite; i++){
+
+		}
+	}
 }
