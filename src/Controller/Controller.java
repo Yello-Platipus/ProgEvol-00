@@ -17,9 +17,11 @@ public class Controller {
         int g = 2 ;
         int i = 0;
         while(i < g) {
+            ag.generarElite();
             ag.selPob(sel);
             ag.cruzPob(cruce);
             ag.mutPob();
+            ag.introducirElite();
             ag.evalPob();
             i++;
         }

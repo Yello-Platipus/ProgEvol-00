@@ -16,7 +16,7 @@ public class AlgoritmoGenetico {
 	private int tamTorneo;
 	private Individuo elMejor;
 	private int pos_mejor;
-	private double elitismo;
+	private int numElite;
 	private Individuo elite[];
 	//TODO
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones,
@@ -25,7 +25,8 @@ public class AlgoritmoGenetico {
 		this.maxGeneraciones = maxGeneraciones;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
-		this.elitismo = elitismo;
+		this.numElite = (int)elitismo*tamPoblacion;
+		elite = new Individuo[numElite];
 	}
 	public void evalPob(){
 		this.fitness = new double[this.tamPoblacion];
@@ -66,12 +67,19 @@ public class AlgoritmoGenetico {
 		}
 	}
 
-	public void getMejor() { System.out.println("El mejor tiene un maximo de " + poblacion[pos_mejor].getFitness() + " " + poblacion[pos_mejor].getFenotipo(0) + " " + poblacion[pos_mejor].getFenotipo(1));}
+	public void getMejor() { System.out.println("El mejor tiene un maximo de " + poblacion[pos_mejor].getFitness());}
 
+	//TODO si la elite es > 1, cómo seleccionamos al resto de individuos elite, ordenamos la poblacion por fitness o almacenamos un array con la pos de los individuos, ordenamos de mayor a menor
+	//Se debería calcular en evalPob
 	public void generarElite(){
-		int numElite = (int)elitismo*tamPoblacion;
-		elite = new Individuo[numElite];
 		for(int i = 0; i < numElite; i++){
+			elite[i] = poblacion[pos_mejor];
+		}
+	}
+
+	//TODO Sustituimos los numElite Individuos con peor fitness por los de elite
+	public void introducirElite() {
+		for(int i = 0; i< numElite; i++){
 
 		}
 	}
