@@ -24,8 +24,9 @@ public class Controller {
             ag.introducirElite();
             ag.evalPob();
             i++;
+            ag.getMejor();
         }
         //devolver mejor
-         ag.getMejor();
+        ag.getMejor();
     }
 }

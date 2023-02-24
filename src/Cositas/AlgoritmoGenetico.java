@@ -38,7 +38,6 @@ public class AlgoritmoGenetico {
 				this.elMejor = this.poblacion[i];
 				this.pos_mejor = i;
 			}
-			getMejor();
 		}
 	}
 
