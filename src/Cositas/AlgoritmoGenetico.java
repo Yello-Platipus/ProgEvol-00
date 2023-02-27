@@ -4,10 +4,17 @@ import Cositas.Cruce.Cruce;
 import Cositas.Individuo.Individuo;
 import Cositas.Individuo.IndividuoFuncion1;
 import Cositas.Seleccion.Seleccion;
+import com.sun.xml.internal.ws.db.DatabindingFactoryImpl;
+
+import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.zip.Inflater;
+
+import javafx.util.Pair;
 
 public class AlgoritmoGenetico {
 	private int tamPoblacion;
-	private Individuo[] poblacion;
+	private ArrayList<Individuo> poblacion;
 	private double[] fitness;
 	private int maxGeneraciones;
 	private double probCruce;
@@ -18,6 +25,7 @@ public class AlgoritmoGenetico {
 	private int pos_mejor;
 	private int numElite;
 	private Individuo elite[];
+	private Comparator<Individuo> comp; // Mayor a menor
 	//TODO
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones,
 			double probCruce, double probMutacion, double elitismo) {
@@ -27,6 +35,17 @@ public class AlgoritmoGenetico {
 		this.probMutacion = probMutacion;
 		this.numElite = (int) elitismo * tamPoblacion;
 		elite = new Individuo[numElite];
+
+		comp = new Comparator<Individuo>() {
+			@Override
+			public int compare(Individuo o1, Individuo o2) {
+				if(o1.getFitness() < o2.getFitness())
+					return 1;
+				else if(o1.getFitness() > o2.getFitness())
+					return -1;
+				return 0;
+			}
+		};
 	}
 	public void evalPob(){
 		fitness = new double[tamPoblacion];
@@ -42,8 +61,10 @@ public class AlgoritmoGenetico {
 	}
 
 	public void initPob(){
-		this.poblacion = new Individuo[this.tamPoblacion];
-		for(int i = 0; i < this.tamPoblacion; i++) this.poblacion[i] = new IndividuoFuncion1();
+		poblacion = new ArrayList<Individuo>();
+		for(int i = 0; i < tamPoblacion; i++) {
+			poblacion.add(new IndividuoFuncion1());
+		}
 	}
 
 	public void selPob(Seleccion sel){
@@ -74,11 +95,10 @@ public class AlgoritmoGenetico {
 	public void generarElite(){
 		poblacion.sort(comp);
 		for(int i = 0; i < numElite; i++){
-			elite[i] = poblacion[pos_mejor];
+			elite[i] = poblacion.get(i);
 		}
 	}
 
-	//TODO Sustituimos los numElite Individuos con peor fitness por los de elite
 	public void introducirElite() {
 		poblacion.sort(comp);
 		for(int i = numElite - 1; i >= 0; i--){
