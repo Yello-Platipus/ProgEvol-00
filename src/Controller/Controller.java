@@ -8,8 +8,14 @@ import Cositas.Seleccion.Seleccion;
 import Cositas.Seleccion.SeleccionRuleta;
 
 public class Controller {
+    private AlgoritmoGenetico ag;
+
+    public Controller(){
+        ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
+    }
+
     public void run() {
-        AlgoritmoGenetico ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
+        ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
         Seleccion sel = new SeleccionRuleta(100);
         Cruce cruce = new CruceMonopunto();
         ag.initPob();
@@ -28,5 +34,9 @@ public class Controller {
         }
         //devolver mejor
         ag.getMejor();
+    }
+
+    public AlgoritmoGenetico getAG() {
+        return ag;
     }
 }
