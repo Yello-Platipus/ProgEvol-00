@@ -3,6 +3,7 @@ package Cositas;
 import Cositas.Cruce.Cruce;
 import Cositas.Individuo.Individuo;
 import Cositas.Individuo.IndividuoFuncion1;
+import Cositas.Mutacion.Mutacion;
 import Cositas.Seleccion.Seleccion;
 import com.sun.xml.internal.ws.db.DatabindingFactoryImpl;
 
@@ -27,6 +28,9 @@ public class AlgoritmoGenetico {
 	private Individuo elite[];
 	private Comparator<Individuo> comp; // Mayor a menor
 	//TODO
+
+	public AlgoritmoGenetico(){}
+
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones,
 			double probCruce, double probMutacion, double elitismo) {
 		this.tamPoblacion = tamPoblacion;
@@ -36,7 +40,7 @@ public class AlgoritmoGenetico {
 		this.numElite = (int) elitismo * tamPoblacion;
 		elite = new Individuo[numElite];
 
-		comp = new Comparator<Individuo>() {
+		comp = new Comparator<Individuo>() { // TODO PASARLO AL INDIVIDUO
 			@Override
 			public int compare(Individuo o1, Individuo o2) {
 				if(o1.getFitness() < o2.getFitness())
@@ -67,7 +71,7 @@ public class AlgoritmoGenetico {
 		}
 	}
 
-	public void selPob(Seleccion sel){
+	public void selPob(){
 		int aux[] = sel.seleccionar(fitness);
 		ArrayList<Individuo> listaAux = new ArrayList<>();
 		for(int i = 0; i < tamPoblacion; i++){
@@ -76,7 +80,7 @@ public class AlgoritmoGenetico {
 		poblacion = listaAux;
 	}
 
-	public void cruzPob(Cruce cruce){
+	public void cruzPob(){
 		for(int i = 0; i < tamPoblacion; i+=2){
 			if(Math.random() < probCruce){
 				cruce.cruzar(poblacion.get(i), poblacion.get(i+1));

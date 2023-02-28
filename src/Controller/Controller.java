@@ -14,18 +14,18 @@ public class Controller {
         ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
     }
 
-    public void run() {
-        ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
-        Seleccion sel = new SeleccionRuleta(100);
-        Cruce cruce = new CruceMonopunto();
+    public void run(AlgoritmoGenetico ag) {
+        //ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
+
+        maxGen = ag.getMaxGeneraciones() ;
+        int i = 1;
         ag.initPob();
         ag.evalPob();
-        int g = 2 ;
-        int i = 0;
-        while(i < g) {
+        while(i <= maxGen) {
+            numGen[i-1] = i;
             ag.generarElite();
-            ag.selPob(sel);
-            ag.cruzPob(cruce);
+            ag.selPob();
+            ag.cruzPob();
             ag.mutPob();
             ag.introducirElite();
             ag.evalPob();
