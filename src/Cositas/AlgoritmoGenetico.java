@@ -27,6 +27,11 @@ public class AlgoritmoGenetico {
 	private int numElite;
 	private Individuo elite[];
 	private Comparator<Individuo> comp; // Mayor a menor
+
+	private Seleccion sel;
+	private Cruce cruce;
+	private Mutacion mut;
+
 	//TODO
 
 	public AlgoritmoGenetico(){}
@@ -94,7 +99,7 @@ public class AlgoritmoGenetico {
 		}
 	}
 
-	public void getMejor() { System.out.println("El mejor tiene un maximo de " + poblacion.get(pos_mejor).getFitness());}
+	public double getMejor() { return poblacion.get(pos_mejor).getFitness();}
 
 	public void generarElite(){
 		poblacion.sort(comp);
@@ -108,10 +113,24 @@ public class AlgoritmoGenetico {
 		for(int i = numElite - 1; i >= 0; i--){
 			poblacion.remove(i);
 			poblacion.add(elite[i]);
+			fitness[i] = elite[i].getFitness();
 		}
 		poblacion.sort(comp);
 	}
-	
+
+	public double calcularMediaGen(){
+		int suma = 0;
+		for(int i = 0; i < tamPoblacion; i++){
+			suma += fitness[i];
+		}
+		return suma/tamPoblacion;
+	}
+
+	public Individuo getMejorIndividuo(){
+		return null;
+	}
+	//Getters y setters
+
 	public int getTamPoblacion() {
 		return tamPoblacion;
 	}

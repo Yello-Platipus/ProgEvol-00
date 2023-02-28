@@ -8,10 +8,14 @@ import Cositas.Seleccion.Seleccion;
 import Cositas.Seleccion.SeleccionRuleta;
 
 public class Controller {
-    private AlgoritmoGenetico ag;
-
+    //private AlgoritmoGenetico ag;
+    private double numGen[];
+    private double mejorGen[];
+    private double mejorAbs[];
+    private double mediaGen[];
+    private int maxGen;
     public Controller(){
-        ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
+        //ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
     }
 
     public void run(AlgoritmoGenetico ag) {
@@ -29,14 +33,25 @@ public class Controller {
             ag.mutPob();
             ag.introducirElite();
             ag.evalPob();
-            i++;
-            ag.getMejor();
+            mediaGen[i-1] = ag.calcularMediaGen();
+            mejorGen[i-1] = ag.getMejor();
+
+            if(i-1 == 0){mejorAbs[0] = mejorGen[0];}
+            else{
+                if(mejorAbs[i-2] < mejorGen[i-1]){
+                    mejorAbs[i-1] = mejorGen[i-1];
+                }
+            }
         }
-        //devolver mejor
-        ag.getMejor();
     }
 
-    public AlgoritmoGenetico getAG() {
-        return ag;
-    }
+    //public AlgoritmoGenetico getAG() {return ag;    }
+
+    public double[] getNumGen() { return numGen;}
+
+    public double[] getMejorGen() { return mejorGen;}
+
+    public double[] getMejorAbs(){return mejorAbs;}
+
+    public double[] getMediaGen(){return mediaGen;}
 }
