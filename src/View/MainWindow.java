@@ -87,6 +87,6 @@ public class MainWindow extends JFrame {
         // put the PlotPanel in a JFrame like a JPanel
 
         plot.setSize(600, 600);
-        this.add(plot, BorderLayout.EAST);
+        this.add(plot, BorderLayout.CENTER);
     }
 }
