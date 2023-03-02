@@ -21,7 +21,8 @@ public class AlgoritmoGenetico {
 	private int maxGeneraciones;
 	private double probCruce;
 	private double probMutacion;
-
+	private double precision;
+	private int d;
 	private int tamTorneo;
 	private Individuo elMejor;
 	private int pos_mejor;
@@ -35,8 +36,6 @@ public class AlgoritmoGenetico {
 	private Mutacion mut;
 	private Funcion func;
 
-	//TODO
-
 	public AlgoritmoGenetico(){}
 
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones,
@@ -47,16 +46,7 @@ public class AlgoritmoGenetico {
 		this.probMutacion = probMutacion;
 		elite = new Individuo[numElite];
 
-		comp = new Comparator<Individuo>() {
-			@Override
-			public int compare(Individuo o1, Individuo o2) {
-				if(o1.getFitness() < o2.getFitness())
-					return 1;
-				else if(o1.getFitness() > o2.getFitness())
-					return -1;
-				return 0;
-			}
-		};
+
 	}
 	public void evalPob(){
 		fitness = new double[tamPoblacion];
@@ -73,9 +63,19 @@ public class AlgoritmoGenetico {
 	}
 
 	public void initPob(){
+		comp = new Comparator<Individuo>() {
+			@Override
+			public int compare(Individuo o1, Individuo o2) {
+				if(o1.getFitness() < o2.getFitness())
+					return 1;
+				else if(o1.getFitness() > o2.getFitness())
+					return -1;
+				return 0;
+			}
+		};
 		poblacion = new ArrayList<Individuo>();
 		for(int i = 0; i < tamPoblacion; i++) {
-			poblacion.add(func.crearIndividuo());
+			poblacion.add(func.crearIndividuo(precision,d));
 		}
 	}
 
@@ -229,4 +229,11 @@ public class AlgoritmoGenetico {
 	}
 
 	public double getElitismo(){return elitismo;}
+
+	public double getPrecision() {return precision;}
+
+	public void setPrecision(double precision) {this.precision = precision;}
+
+	public int getD() {return d;}
+	public void setD(int d){this.d = d;}
 }

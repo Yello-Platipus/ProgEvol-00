@@ -14,6 +14,8 @@ public class Controller {
     private double mejorAbs[];
     private double mediaGen[];
     private int maxGen;
+    Individuo mejorInd;
+
     public Controller(){
         //ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
     }
@@ -26,6 +28,7 @@ public class Controller {
         mejorGen = new double[maxGen];
         mejorAbs = new double[maxGen];
         mediaGen = new double[maxGen];
+
         int i = 1;
         ag.initPob();
         ag.evalPob();
@@ -40,12 +43,20 @@ public class Controller {
             mediaGen[i-1] = ag.calcularMediaGen();
             mejorGen[i-1] = ag.getMejor();
 
-            if(i-1 == 0){mejorAbs[0] = mejorGen[0];}
+            if(i == 1){
+                mejorAbs[i-1] = mejorGen[i-1];
+                mejorInd = ag.getMejorIndividuo();
+            }
             else{
                 if(mejorAbs[i-2] < mejorGen[i-1]){
                     mejorAbs[i-1] = mejorGen[i-1];
+                    mejorInd = ag.getMejorIndividuo();
+                }
+                else{
+                    mejorAbs[i-1] = mejorAbs[i-2];
                 }
             }
+            i++;
         }
     }
 
@@ -56,4 +67,6 @@ public class Controller {
     public double[] getMejorAbs(){return mejorAbs;}
 
     public double[] getMediaGen(){return mediaGen;}
+
+    public Individuo getMejorIndAbs() { return mejorInd; }
 }

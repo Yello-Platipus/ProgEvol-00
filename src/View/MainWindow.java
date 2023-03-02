@@ -25,20 +25,21 @@ public class MainWindow extends JFrame {
         super("Panel de configuracion");
         cPanel = new ConfigPanel<AlgoritmoGenetico>();
         this.cont = cont;
-
+        mSol = "            Mejor solucion: ";
         ag = new AlgoritmoGenetico();
         cPanel.setTarget(ag);
         init();
-        cPanel.initialize();
+
     }
     public void init(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         iniPanel();
-        JButton boton = new JButton("Ejecutar");
-        boton.addActionListener(new ActionListener() {
+        JButton ejecBoton = new JButton("Ejecutar");
+        ejecBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                cPanel.initialize();
                 cont.run(ag);
                 iniGrafica();
                 mSol = cont.getMejorIndAbs().toString();
@@ -48,7 +49,21 @@ public class MainWindow extends JFrame {
                 setVisible(true);
             }
         });
-        this.add(boton, BorderLayout.SOUTH);
+        JButton resetBoton = new JButton("Reset");
+        resetBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ag = new AlgoritmoGenetico();
+                cPanel.setTarget(ag);
+            }
+        });
+        JLabel mejorSol = new JLabel(mSol);
+        JPanel panelSur = new JPanel(new BorderLayout());
+        panelSur.add(ejecBoton, BorderLayout.EAST);
+        panelSur.add(resetBoton,BorderLayout.WEST);
+        panelSur.add(mejorSol, BorderLayout.CENTER);
+
+        this.add(panelSur, BorderLayout.SOUTH);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.pack();
         this.setVisible(true);
@@ -59,30 +74,33 @@ public class MainWindow extends JFrame {
                 "Poblacion", "Numero de individuos en la poblacion",
                 "tamPoblacion", 0, Integer.MAX_VALUE));
         cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
-                "Número de generaciones", "Numero de generaciones a ejecutar",
+                "Numero de generaciones", "Numero de generaciones a ejecutar",
                 "maxGeneraciones", 0, Integer.MAX_VALUE));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Probabilidad de cruce", "Probabilidad de que se produzca un cruce entre dos individuos",
                 "probCruce", 0, 1));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
-                "Probabilidad de mutación", "Probabilidad de que se produzca una mutación en un individuo",
+                "Probabilidad de mutacin", "Probabilidad de que se produzca una mutacion en un individuo",
                 "probMutacion", 0, 1));
-        // TODO Falta la opción de la precisión
-        //cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
-        //       "Precision", "Precision para la discretización del intervalo",
-        //       "precision", 1, Integer.MAX_VALUE));
+        cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
+               "Precision", "Precision para la discretización del intervalo",
+               "precision", 0, 1));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de seleccion", "Tipo de seleccion a utilizar",
-                "sel", new Seleccion[]{new SeleccionRuleta()}));
+                "sel", new Seleccion[]{new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
+                                                new SeleccionEstocasticaUniversal()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de funcion", "Tipo de funcion",
-                "func", new Funcion[]{new Funcion1()}));
+                "func", new Funcion[]{new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de cruce", "Tipo de cruce",
                 "cruce", new Cruce[]{new CruceMonopunto(), new CruceUniforme()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
                 "mut", new Mutacion[]{new MutacionBasica()}));
+        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
+                "d", "Dimensiones de la funcion 4",
+                "d", 1, Integer.MAX_VALUE));
         cPanel.setSize(1000, 600);
         cPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.PAGE_AXIS));

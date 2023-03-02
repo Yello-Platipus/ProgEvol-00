@@ -9,7 +9,7 @@ public class SeleccionTorneoDeterminista  extends Seleccion{
 
     private static final int k = 3;
 
-    public SeleccionTorneoDeterminista(int tamPoblacion) {
+    public SeleccionTorneoDeterminista() {
         super();
     }
 

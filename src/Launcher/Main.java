@@ -1,6 +1,7 @@
 package Launcher;
 
 import Controller.Controller;
+import Util.Converter;
 import View.ConfigPanel;
 import View.MainWindow;
 

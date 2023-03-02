@@ -5,8 +5,8 @@ import sun.awt.windows.WingDings;
 
 public class IndividuoFuncion1 extends Individuo<Boolean> {
 
-	public IndividuoFuncion1() {
-		super();
+	public IndividuoFuncion1(double precision,int d) {
+		super(precision,d);
 		this.tamGenes = new int[2];
 		this.min = new double[2];
 		this.max = new double[2];
@@ -14,10 +14,8 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 		this.min[1] = 4.100;
 		this.max[0] = 12.100;
 		this.max[1] = 5.800;
-		this.valorError = 0.001;
-		this.precision = 0.001;
-		this.tamGenes[0] = this.tamGen(this.valorError, min[0], max[0]);
-		this.tamGenes[1] = this.tamGen(this.valorError, min[1], max[1]);
+		this.tamGenes[0] = this.tamGen(min[0], max[0]);
+		this.tamGenes[1] = this.tamGen(min[1], max[1]);
 		int tamTotal = tamGenes[0] + tamGenes[1];
 		this.cromosoma = new Boolean[tamTotal];
 		for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextBoolean();
@@ -34,7 +32,7 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 
 
 
-	public int tamGen(double valorError, double min, double max) {
+	public int tamGen( double min, double max) {
 		return (int) (Math.log10(((max - min) / precision) + 1) / Math.log10(2));
 	}
 
@@ -42,21 +40,8 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 		return this.min[x] + Converter.bin2dec(cromosoma, tamGenes, x)*(this.max[x] - this.min[x])/(Math.pow(2,tamGenes[x]) - 1);
 	}
 
-	public void mutar(double probMutacion){
-		boolean cambios = false;
-		for(int i = 0; i < cromosoma.length; i++){
-			if(rand.nextDouble() < probMutacion){
-				cromosoma[i] = rand.nextBoolean();
-				cambios = true;
-			}
-		}
-		if(cambios){
-			//TODO refrescar fenotipo
-		}
-	}
-
 	@Override
-	public int compareTo(Individuo o) {
+	public int compareTo(Individuo o) { //Maximizar
 		if(this.getFitness() < o.getFitness())
 			return 1;
 		else if(this.getFitness() > o.getFitness())
