@@ -8,9 +8,7 @@ import java.util.Comparator;
 public abstract class Seleccion {
     protected int tamPoblacion;
 
-    public Seleccion(int tamPoblacion) {
-        this.tamPoblacion = tamPoblacion;
-    }
+    public Seleccion() {}
 
     public abstract String toString();
     public int getTamPoblacion() {

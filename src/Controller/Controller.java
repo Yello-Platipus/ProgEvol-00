@@ -22,6 +22,10 @@ public class Controller {
         //ag = new AlgoritmoGenetico(100, 100, 0.6, 0.05, 0.01);
 
         maxGen = ag.getMaxGeneraciones() ;
+        numGen = new double[maxGen];
+        mejorGen = new double[maxGen];
+        mejorAbs = new double[maxGen];
+        mediaGen = new double[maxGen];
         int i = 1;
         ag.initPob();
         ag.evalPob();
@@ -44,8 +48,6 @@ public class Controller {
             }
         }
     }
-
-    //public AlgoritmoGenetico getAG() {return ag;    }
 
     public double[] getNumGen() { return numGen;}
 

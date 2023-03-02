@@ -1,6 +1,7 @@
 package Cositas.Individuo;
 
 import Util.Converter;
+import sun.awt.windows.WingDings;
 
 public class IndividuoFuncion1 extends Individuo<Boolean> {
 
@@ -52,5 +53,14 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 		if(cambios){
 			//TODO refrescar fenotipo
 		}
+	}
+
+	@Override
+	public int compareTo(Individuo o) {
+		if(this.getFitness() < o.getFitness())
+			return 1;
+		else if(this.getFitness() > o.getFitness())
+			return -1;
+		return 0;
 	}
 }

@@ -1,5 +1,6 @@
 package Cositas.Individuo;
 
+import java.util.Comparator;
 import java.util.Random;
 import Util.Converter;
 
@@ -11,6 +12,7 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	protected double valorError;
 	protected Random rand;
 	protected double precision;
+	//protected Comparator comp;
 
 	public Individuo() {
 		this.rand = new Random();
@@ -26,5 +28,7 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 		return cromosoma;
 	}
 
-	public abstract void mutar(double probMutacion);
+	//public abstract void mutar(double probMutacion);
+
+	public Random getRand(){return rand;}
 }

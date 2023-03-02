@@ -1,6 +1,7 @@
 package Cositas;
 
 import Cositas.Cruce.Cruce;
+import Cositas.Funcion.Funcion;
 import Cositas.Individuo.Individuo;
 import Cositas.Individuo.IndividuoFuncion1;
 import Cositas.Mutacion.*;
@@ -24,6 +25,7 @@ public class AlgoritmoGenetico {
 	private int tamTorneo;
 	private Individuo elMejor;
 	private int pos_mejor;
+	private double elitismo;
 	private int numElite;
 	private Individuo elite[];
 	private Comparator<Individuo> comp; // Mayor a menor
@@ -31,13 +33,14 @@ public class AlgoritmoGenetico {
 	private Seleccion sel;
 	private Cruce cruce;
 	private Mutacion mut;
+	private Funcion func;
 
 	//TODO
 
 	public AlgoritmoGenetico(){}
 
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones,
-			double probCruce, double probMutacion, double elitismo) {
+			double probCruce, double probMutacion) {
 		this.tamPoblacion = tamPoblacion;
 		this.maxGeneraciones = maxGeneraciones;
 		this.probCruce = probCruce;
@@ -45,7 +48,7 @@ public class AlgoritmoGenetico {
 		this.numElite = (int) elitismo * tamPoblacion;
 		elite = new Individuo[numElite];
 
-		comp = new Comparator<Individuo>() { // TODO PASARLO AL INDIVIDUO
+		comp = new Comparator<Individuo>() {
 			@Override
 			public int compare(Individuo o1, Individuo o2) {
 				if(o1.getFitness() < o2.getFitness())
@@ -61,9 +64,10 @@ public class AlgoritmoGenetico {
 		pos_mejor = 0;
 		elMejor = poblacion.get(0);
 		for(int i = 0; i < tamPoblacion; i++){
-			fitness[i] = poblacion.get(i).getFitness();
-			if(fitness[i] > elMejor.getFitness()){
-				elMejor = poblacion.get(i);
+			Individuo ind = poblacion.get(i);
+			fitness[i] = ind.getFitness();
+			if(ind.compareTo(elMejor) == -1){
+				elMejor = ind;
 				pos_mejor = i;
 			}
 		}
@@ -72,17 +76,13 @@ public class AlgoritmoGenetico {
 	public void initPob(){
 		poblacion = new ArrayList<Individuo>();
 		for(int i = 0; i < tamPoblacion; i++) {
-			poblacion.add(new IndividuoFuncion1());
+			poblacion.add(func.crearIndividuo());
 		}
 	}
 
 	public void selPob(){
-		int aux[] = sel.seleccionar(fitness);
-		ArrayList<Individuo> listaAux = new ArrayList<>();
-		for(int i = 0; i < tamPoblacion; i++){
-			listaAux.add(poblacion.get(aux[i]));
-		}
-		poblacion = listaAux;
+		poblacion = sel.seleccionar(poblacion, tamTorneo);
+
 	}
 
 	public void cruzPob(){
@@ -95,7 +95,7 @@ public class AlgoritmoGenetico {
 
 	public void mutPob(){
 		for(int i = 0; i < tamPoblacion; i++){
-			poblacion.get(i).mutar(probMutacion);
+			mut.mutar(poblacion.get(i), probMutacion);
 		}
 	}
 
@@ -127,7 +127,7 @@ public class AlgoritmoGenetico {
 	}
 
 	public Individuo getMejorIndividuo(){
-		return null;
+		return elMejor;
 	}
 	//Getters y setters
 
@@ -187,14 +187,6 @@ public class AlgoritmoGenetico {
 		this.tamTorneo = tamTorneo;
 	}
 
-	public Individuo getElMejor() {
-		return elMejor;
-	}
-
-	public void setElMejor(Individuo elMejor) {
-		this.elMejor = elMejor;
-	}
-
 	public int getPos_mejor() {
 		return pos_mejor;
 	}
@@ -230,4 +222,10 @@ public class AlgoritmoGenetico {
 	public void setFunc(Funcion func) {
 		this.func = func;
 	}
+
+	public void setElitismo(double elitismo) {
+		this.elitismo = elitismo;
+	}
+
+	public double getElitismo(){return elitismo;}
 }
