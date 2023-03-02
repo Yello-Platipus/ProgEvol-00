@@ -10,7 +10,7 @@ public class Converter {
         int ret = 0;
         for(int i = 0 + ini; i < tam + ini; i++) {
             if((Boolean) cromosoma[i])
-                ret += Math.pow(2,tam - i);
+                ret += Math.pow(2,tam - i - 1);
         }
         return ret;
     }

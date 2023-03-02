@@ -13,13 +13,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javafx.stage.Screen;
 import org.math.plot.*;
 
 public class MainWindow extends JFrame {
-    Controller cont;
-    ConfigPanel cPanel;
-    AlgoritmoGenetico ag;
-
+    private Controller cont;
+    private ConfigPanel cPanel;
+    private AlgoritmoGenetico ag;
+    String mSol;
     public MainWindow(Controller cont){
         super("Panel de configuracion");
         cPanel = new ConfigPanel<AlgoritmoGenetico>();
@@ -40,6 +41,11 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cont.run(ag);
                 iniGrafica();
+                mSol = cont.getMejorIndAbs().toString();
+                setExtendedState(JFrame.MAXIMIZED_BOTH);
+                setSize(1920, 1080);
+                pack();
+                setVisible(true);
             }
         });
         this.add(boton, BorderLayout.SOUTH);

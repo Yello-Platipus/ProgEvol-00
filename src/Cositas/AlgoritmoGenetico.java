@@ -45,7 +45,6 @@ public class AlgoritmoGenetico {
 		this.maxGeneraciones = maxGeneraciones;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
-		this.numElite = (int) elitismo * tamPoblacion;
 		elite = new Individuo[numElite];
 
 		comp = new Comparator<Individuo>() {
@@ -86,7 +85,7 @@ public class AlgoritmoGenetico {
 	}
 
 	public void cruzPob(){
-		for(int i = 0; i < tamPoblacion; i+=2){
+		for(int i = 0; i < tamPoblacion - 1; i += 2){
 			if(Math.random() < probCruce){
 				cruce.cruzar(poblacion.get(i), poblacion.get(i+1));
 			}
@@ -102,6 +101,8 @@ public class AlgoritmoGenetico {
 	public double getMejor() { return poblacion.get(pos_mejor).getFitness();}
 
 	public void generarElite(){
+		this.numElite = (int) elitismo * tamPoblacion;
+		elite = new Individuo[numElite];
 		poblacion.sort(comp);
 		for(int i = 0; i < numElite; i++){
 			elite[i] = poblacion.get(i);
