@@ -1,26 +1,35 @@
 package Cositas.Seleccion;
 
-public class SeleccionRuleta extends Seleccion{
-    private final String nombre = "Ruleta";
-    private double[] fitness;
+import Cositas.Individuo.Individuo;
 
-    public SeleccionRuleta(int tamPoblacion) {
-        super(tamPoblacion);
+import java.util.ArrayList;
+import java.util.Comparator;
+
+public class SeleccionRuleta extends Seleccion{
+
+    public SeleccionRuleta() {
+        super();
     }
 
-public int[] seleccionar(double fitness[]){
-        int[] seleccionados = new int[this.tamPoblacion];
-        double[] fitnessAcumulado = new double[fitness.length];
+    @Override
+    public String toString() {
+        return "Seleccion por ruleta";
+    }
+
+    public ArrayList<Individuo> seleccionar(ArrayList<Individuo> poblacion, int tamTorneo){
+        int tamPoblacion = poblacion.size();
+        ArrayList<Individuo> seleccionados = new ArrayList<Individuo>(tamPoblacion);
+        double[] fitnessAcumulado = new double[tamPoblacion];
         double fitnessTotal = 0;
-        for(int i = 0; i < fitness.length; i++){
-            fitnessTotal += fitness[i];
+        for(int i = 0; i < tamPoblacion; i++){
+            fitnessTotal += poblacion.get(i).getFitness();
             fitnessAcumulado[i] = fitnessTotal;
         }
-        for(int i = 0; i < this.tamPoblacion; i++){
+        for(int i = 0; i < tamPoblacion; i++){
             double aleatorio = Math.random() * fitnessTotal;
-            for(int j = 0; j < fitness.length; j++){
+            for(int j = 0; j < tamPoblacion; j++){
                 if(aleatorio < fitnessAcumulado[j]){
-                    seleccionados[i] = j;
+                    seleccionados.add(poblacion.get(j));
                     break;
                 }
             }

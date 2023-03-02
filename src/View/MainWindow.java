@@ -8,6 +8,9 @@ import View.ConfigPanel.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import org.math.plot.*;
 
 public class MainWindow extends JFrame {
@@ -28,7 +31,15 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         iniPanel();
-        iniGrafica();
+        JButton boton = new JButton("Ejecutar");
+        boton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cont.run(ag);
+                iniGrafica();
+            }
+        });
+        this.add(boton, BorderLayout.SOUTH);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.pack();
         this.setVisible(true);
@@ -37,10 +48,10 @@ public class MainWindow extends JFrame {
     public void iniPanel(){
         cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "Poblacion", "Numero de individuos en la poblacion",
-                "tamPoblacion", 1, Integer.MAX_VALUE));
+                "tamPoblacion", 0, Integer.MAX_VALUE));
         cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "Número de generaciones", "Numero de generaciones a ejecutar",
-                "maxGeneraciones", 1, Integer.MAX_VALUE));
+                "maxGeneraciones", 0, Integer.MAX_VALUE));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Probabilidad de cruce", "Probabilidad de que se produzca un cruce entre dos individuos",
                 "probCruce", 0, 1));

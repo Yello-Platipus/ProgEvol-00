@@ -4,6 +4,11 @@ import Cositas.Individuo.Individuo;
 
 public class CruceUniforme extends Cruce{
     @Override
+    public String toString() {
+        return "Cruce uniforme";
+    }
+
+    @Override
     public void cruzar(Individuo i1, Individuo i2) {
 
         for(int i = 0; i < i1.getCromosoma().length; i++){

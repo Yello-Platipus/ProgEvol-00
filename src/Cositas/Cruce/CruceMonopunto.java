@@ -4,6 +4,11 @@ import Cositas.Individuo.Individuo;
 
 public class CruceMonopunto extends Cruce{
     @Override
+    public String toString() {
+        return "Cruce monopunto";
+    }
+
+    @Override
     public void cruzar(Individuo i1, Individuo i2) {
         int tam = i1.getCromosoma().length;
         int corte = (int) (Math.random() * tam);

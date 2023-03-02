@@ -3,7 +3,7 @@ package Cositas.Individuo;
 import java.util.Random;
 import Util.Converter;
 
-public abstract class Individuo<T> {
+public abstract class Individuo<T> implements Comparable<Individuo>{
 	protected T[] cromosoma;
 	protected int[] tamGenes;
 	protected double min[];

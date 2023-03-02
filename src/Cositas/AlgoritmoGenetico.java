@@ -3,7 +3,7 @@ package Cositas;
 import Cositas.Cruce.Cruce;
 import Cositas.Individuo.Individuo;
 import Cositas.Individuo.IndividuoFuncion1;
-import Cositas.Mutacion.Mutacion;
+import Cositas.Mutacion.*;
 import Cositas.Seleccion.Seleccion;
 import com.sun.xml.internal.ws.db.DatabindingFactoryImpl;
 
@@ -199,7 +199,35 @@ public class AlgoritmoGenetico {
 		return pos_mejor;
 	}
 
-	public void setPos_mejor(int pos_mejor) {
-		this.pos_mejor = pos_mejor;
+	public Seleccion getSel() {
+		return sel;
+	}
+
+	public void setSel(Seleccion sel) {
+		this.sel = sel;
+	}
+
+	public Cruce getCruce() {
+		return cruce;
+	}
+
+	public void setCruce(Cruce cruce) {
+		this.cruce = cruce;
+	}
+
+	public Mutacion getMut() {
+		return mut;
+	}
+
+	public void setMut(Mutacion mut) {
+		this.mut = mut;
+	}
+
+	public Funcion getFunc() {
+		return func;
+	}
+
+	public void setFunc(Funcion func) {
+		this.func = func;
 	}
 }
