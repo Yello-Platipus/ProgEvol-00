@@ -20,6 +20,7 @@ public class MainWindow extends JFrame {
     private Controller cont;
     private ConfigPanel cPanel;
     private AlgoritmoGenetico ag;
+    JLabel mejorSol;
     String mSol;
     public MainWindow(Controller cont){
         super("Panel de configuracion");
@@ -43,24 +44,17 @@ public class MainWindow extends JFrame {
                 cont.run(ag);
                 iniGrafica();
                 mSol = cont.getMejorIndAbs().toString();
+                mejorSol.setText(mSol);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
                 setSize(1920, 1080);
                 pack();
                 setVisible(true);
             }
         });
-        JButton resetBoton = new JButton("Reset");
-        resetBoton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ag = new AlgoritmoGenetico();
-                cPanel.setTarget(ag);
-            }
-        });
-        JLabel mejorSol = new JLabel(mSol);
+
+        mejorSol = new JLabel(mSol);
         JPanel panelSur = new JPanel(new BorderLayout());
         panelSur.add(ejecBoton, BorderLayout.EAST);
-        panelSur.add(resetBoton,BorderLayout.WEST);
         panelSur.add(mejorSol, BorderLayout.CENTER);
 
         this.add(panelSur, BorderLayout.SOUTH);
@@ -80,7 +74,7 @@ public class MainWindow extends JFrame {
                 "Probabilidad de cruce", "Probabilidad de que se produzca un cruce entre dos individuos",
                 "probCruce", 0, 1));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
-                "Probabilidad de mutacin", "Probabilidad de que se produzca una mutacion en un individuo",
+                "Probabilidad de mutacion", "Probabilidad de que se produzca una mutacion en un individuo",
                 "probMutacion", 0, 1));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
                "Precision", "Precision para la discretización del intervalo",
@@ -88,7 +82,7 @@ public class MainWindow extends JFrame {
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de seleccion", "Tipo de seleccion a utilizar",
                 "sel", new Seleccion[]{new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
-                                                new SeleccionEstocasticaUniversal()}));
+                                                new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionRestos()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de funcion", "Tipo de funcion",
                 "func", new Funcion[]{new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b()}));

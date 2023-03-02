@@ -3,16 +3,12 @@ package Cositas;
 import Cositas.Cruce.Cruce;
 import Cositas.Funcion.Funcion;
 import Cositas.Individuo.Individuo;
-import Cositas.Individuo.IndividuoFuncion1;
-import Cositas.Mutacion.*;
+import Cositas.Mutacion.Mutacion;
 import Cositas.Seleccion.Seleccion;
-import com.sun.xml.internal.ws.db.DatabindingFactoryImpl;
 
-import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
+import java.util.Collections;
 
-import javafx.util.Pair;
 
 public class AlgoritmoGenetico {
 	private int tamPoblacion;
@@ -29,7 +25,6 @@ public class AlgoritmoGenetico {
 	private double elitismo;
 	private int numElite;
 	private Individuo elite[];
-	private Comparator<Individuo> comp; // Mayor a menor
 
 	private Seleccion sel;
 	private Cruce cruce;
@@ -38,16 +33,6 @@ public class AlgoritmoGenetico {
 
 	public AlgoritmoGenetico(){}
 
-	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones,
-			double probCruce, double probMutacion) {
-		this.tamPoblacion = tamPoblacion;
-		this.maxGeneraciones = maxGeneraciones;
-		this.probCruce = probCruce;
-		this.probMutacion = probMutacion;
-		elite = new Individuo[numElite];
-
-
-	}
 	public void evalPob(){
 		fitness = new double[tamPoblacion];
 		pos_mejor = 0;
@@ -63,16 +48,6 @@ public class AlgoritmoGenetico {
 	}
 
 	public void initPob(){
-		comp = new Comparator<Individuo>() {
-			@Override
-			public int compare(Individuo o1, Individuo o2) {
-				if(o1.getFitness() < o2.getFitness())
-					return 1;
-				else if(o1.getFitness() > o2.getFitness())
-					return -1;
-				return 0;
-			}
-		};
 		poblacion = new ArrayList<Individuo>();
 		for(int i = 0; i < tamPoblacion; i++) {
 			poblacion.add(func.crearIndividuo(precision,d));
@@ -103,20 +78,20 @@ public class AlgoritmoGenetico {
 	public void generarElite(){
 		this.numElite = (int) elitismo * tamPoblacion;
 		elite = new Individuo[numElite];
-		poblacion.sort(comp);
+		Collections.sort(poblacion);
 		for(int i = 0; i < numElite; i++){
 			elite[i] = poblacion.get(i);
 		}
 	}
 
 	public void introducirElite() {
-		poblacion.sort(comp);
+		Collections.sort(poblacion);
 		for(int i = numElite - 1; i >= 0; i--){
 			poblacion.remove(i);
 			poblacion.add(elite[i]);
 			fitness[i] = elite[i].getFitness();
 		}
-		poblacion.sort(comp);
+		Collections.sort(poblacion);
 	}
 
 	public double calcularMediaGen(){

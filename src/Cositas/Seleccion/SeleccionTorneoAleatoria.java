@@ -3,6 +3,8 @@ package Cositas.Seleccion;
 import Cositas.Individuo.Individuo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class SeleccionTorneoAleatoria extends Seleccion{
     public SeleccionTorneoAleatoria() {
@@ -23,7 +25,8 @@ public class SeleccionTorneoAleatoria extends Seleccion{
         for(int i = 0; i < tamPoblacion; i++){
             for(int j = 0; j < tamTorneo; j++)
                 torneo.add(poblacion.get((int) (Math.random() * tamPoblacion)));
-            torneo.sort(Individuo::compareTo);
+            Collections.sort(torneo);
+
             if(Math.random() > p)
                 seleccionados.add(torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == 1 ? torneo.get(0) : torneo.get(tamTorneo - 1));
             else

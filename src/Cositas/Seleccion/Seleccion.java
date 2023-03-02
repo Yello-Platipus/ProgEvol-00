@@ -3,7 +3,7 @@ package Cositas.Seleccion;
 import Cositas.Individuo.Individuo;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+
 
 public abstract class Seleccion {
 
