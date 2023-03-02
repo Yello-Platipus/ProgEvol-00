@@ -39,6 +39,11 @@ public class IndividuoFuncion4b extends Individuo<Double>{
     }
 
     @Override
+    public void setCromosoma(int i, Double o) {
+        cromosoma[i] = o;
+    }
+
+    @Override
     public int compareTo(Individuo o) { //Minimizar
         if(this.getFitness() > o.getFitness())
             return 1;

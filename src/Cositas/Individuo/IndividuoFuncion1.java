@@ -1,7 +1,6 @@
 package Cositas.Individuo;
 
 import Util.Converter;
-import sun.awt.windows.WingDings;
 
 public class IndividuoFuncion1 extends Individuo<Boolean> {
 
@@ -38,6 +37,11 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 
 	public double getFenotipo(int x) {
 		return this.min[x] + Converter.bin2dec(cromosoma, tamGenes, x)*(this.max[x] - this.min[x])/(Math.pow(2,tamGenes[x]) - 1);
+	}
+
+	@Override
+	public void setCromosoma(int i, Boolean o) {
+		cromosoma[i] = o;
 	}
 
 	@Override

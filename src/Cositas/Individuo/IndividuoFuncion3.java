@@ -46,6 +46,11 @@ public class IndividuoFuncion3 extends Individuo<Boolean>{
     }
 
     @Override
+    public void setCromosoma(int i, Boolean o) {
+        cromosoma[i] = o;
+    }
+
+    @Override
     public int compareTo(Individuo o) { //Minimizar
         if(this.getFitness() > o.getFitness())
             return 1;

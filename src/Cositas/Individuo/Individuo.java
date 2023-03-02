@@ -46,6 +46,9 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 			else if(i == n-1)
 				r +=" y ";
 		}
+		r+= "con fitness " + getFitness();
 		return r;
 	}
+
+	public abstract void setCromosoma(int i, T o);
 }

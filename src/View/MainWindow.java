@@ -13,22 +13,29 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javafx.stage.Screen;
 import org.math.plot.*;
 
 public class MainWindow extends JFrame {
     private Controller cont;
     private ConfigPanel cPanel;
+
+    private Plot2DPanel plot;
     private AlgoritmoGenetico ag;
-    JLabel mejorSol;
+    private JLabel mejorSol;
     String mSol;
+    private double[] numGen ;
+    private double[] mejorGen ;
+    private double[] mejorAbs;
+    private double[] mediaGen ;
     public MainWindow(Controller cont){
         super("Panel de configuracion");
-        cPanel = new ConfigPanel<AlgoritmoGenetico>();
         this.cont = cont;
-        mSol = "            Mejor solucion: ";
-        ag = new AlgoritmoGenetico();
+        cPanel = new ConfigPanel<AlgoritmoGenetico>();
+        plot = new Plot2DPanel();
+
+        ag = new AlgoritmoGenetico(100,100,0.6,0.05,0.001);
         cPanel.setTarget(ag);
+        mSol = "            Mejor solucion: ";
         init();
 
     }
@@ -42,12 +49,25 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cPanel.initialize();
                 cont.run(ag);
+                plot = new Plot2DPanel();
                 iniGrafica();
                 mSol = cont.getMejorIndAbs().toString();
                 mejorSol.setText(mSol);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
-                setSize(1920, 1080);
-                pack();
+                //setSize(1920, 1080);
+                //pack();
+                setVisible(true);
+            }
+        });
+        JButton resetBoton = new JButton("Reset");
+        resetBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cPanel.setTarget(new AlgoritmoGenetico());
+                plot = new Plot2DPanel();
+                iniGrafica();
+                mSol = cont.getMejorIndAbs();
+                mejorSol.setText(mSol);
                 setVisible(true);
             }
         });
@@ -56,10 +76,13 @@ public class MainWindow extends JFrame {
         JPanel panelSur = new JPanel(new BorderLayout());
         panelSur.add(ejecBoton, BorderLayout.EAST);
         panelSur.add(mejorSol, BorderLayout.CENTER);
+        panelSur.add(resetBoton, BorderLayout.WEST);
 
+        //this.setSize(1920,1080);
         this.add(panelSur, BorderLayout.SOUTH);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.pack();
+        //this.pack();
+
         this.setVisible(true);
     }
 
@@ -83,6 +106,12 @@ public class MainWindow extends JFrame {
                 "Tipo de seleccion", "Tipo de seleccion a utilizar",
                 "sel", new Seleccion[]{new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
                                                 new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionRestos()}));
+        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
+                "Tamaño del torneo", "Tamaño de torneo de la seleccion por torneo",
+                "tamTorneo", 1, Integer.MAX_VALUE));
+        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
+                "d", "Dimensiones de la funcion 4",
+                "d", 1, Integer.MAX_VALUE));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de funcion", "Tipo de funcion",
                 "func", new Funcion[]{new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b()}));
@@ -92,28 +121,24 @@ public class MainWindow extends JFrame {
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
                 "mut", new Mutacion[]{new MutacionBasica()}));
-        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
-                "d", "Dimensiones de la funcion 4",
-                "d", 1, Integer.MAX_VALUE));
-        cPanel.setSize(1000, 600);
-        cPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.PAGE_AXIS));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Proporcion de elite", "Proporcion de la poblacion que se guarda como elite",
-                "elitismo", 0.1, 1));
-
+                "elitismo", 0, 1));
+        //cPanel.setSize(1000, 600);
+        cPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.PAGE_AXIS));
         this.add(cPanel, BorderLayout.WEST);
     }
 
     public void iniGrafica(){
         // define your data
-        double[] numGen = cont.getNumGen();
-        double[] mejorGen = cont.getMejorGen();
-        double[] mejorAbs = cont.getMejorAbs();
-        double[] mediaGen = cont.getMediaGen();
+        numGen = cont.getNumGen();
+        mejorGen = cont.getMejorGen();
+        mejorAbs = cont.getMejorAbs();
+        mediaGen = cont.getMediaGen();
 
         // create your PlotPanel (you can use it as a JPanel)
-        Plot2DPanel plot = new Plot2DPanel();
+
 
         // define the legend position
         plot.addLegend("SOUTH");
@@ -127,7 +152,7 @@ public class MainWindow extends JFrame {
 
         // put the PlotPanel in a JFrame like a JPanel
 
-        plot.setSize(600, 600);
+        //plot.setSize(600, 600);
         this.add(plot, BorderLayout.CENTER);
     }
 }

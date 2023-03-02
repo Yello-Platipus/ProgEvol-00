@@ -13,7 +13,7 @@ import java.util.Collections;
 public class AlgoritmoGenetico {
 	private int tamPoblacion;
 	private ArrayList<Individuo> poblacion;
-	private double[] fitness;
+	//private double[] fitness;
 	private int maxGeneraciones;
 	private double probCruce;
 	private double probMutacion;
@@ -21,10 +21,12 @@ public class AlgoritmoGenetico {
 	private int d;
 	private int tamTorneo;
 	private Individuo elMejor;
-	private int pos_mejor;
+
 	private double elitismo;
-	private int numElite;
+	private int numElite = 0;
 	private Individuo elite[];
+
+	private double mediaGen;
 
 	private Seleccion sel;
 	private Cruce cruce;
@@ -32,19 +34,28 @@ public class AlgoritmoGenetico {
 	private Funcion func;
 
 	public AlgoritmoGenetico(){}
+	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutacion, double precision){
+		this.tamPoblacion = tamPoblacion;
+		this.maxGeneraciones = maxGeneraciones;
+		this.probCruce = probCruce;
+		this.probMutacion = probMutacion;
+		this.precision = precision;
+	}
 
 	public void evalPob(){
-		fitness = new double[tamPoblacion];
-		pos_mejor = 0;
+		//fitness = new double[tamPoblacion];
+		Collections.sort(poblacion);
 		elMejor = poblacion.get(0);
+		/*
 		for(int i = 0; i < tamPoblacion; i++){
 			Individuo ind = poblacion.get(i);
-			fitness[i] = ind.getFitness();
+			//fitness[i] = ind.getFitness();
 			if(ind.compareTo(elMejor) == -1){
 				elMejor = ind;
-				pos_mejor = i;
+
 			}
-		}
+		}*/
+		mediaGen = calcularMediaGen();
 	}
 
 	public void initPob(){
@@ -53,30 +64,27 @@ public class AlgoritmoGenetico {
 			poblacion.add(func.crearIndividuo(precision,d));
 		}
 	}
-
 	public void selPob(){
 		poblacion = sel.seleccionar(poblacion, tamTorneo);
-
 	}
-
 	public void cruzPob(){
+		Collections.shuffle(poblacion);
 		for(int i = 0; i < tamPoblacion - 1; i += 2){
 			if(Math.random() < probCruce){
 				cruce.cruzar(poblacion.get(i), poblacion.get(i+1));
 			}
 		}
 	}
-
 	public void mutPob(){
 		for(int i = 0; i < tamPoblacion; i++){
 			mut.mutar(poblacion.get(i), probMutacion);
 		}
 	}
 
-	public double getMejor() { return poblacion.get(pos_mejor).getFitness();}
+	public double getMejorFitness() { return elMejor.getFitness();}
 
 	public void generarElite(){
-		this.numElite = (int) elitismo * tamPoblacion;
+		this.numElite = (int)Math.round(elitismo * tamPoblacion);
 		elite = new Individuo[numElite];
 		Collections.sort(poblacion);
 		for(int i = 0; i < numElite; i++){
@@ -86,10 +94,9 @@ public class AlgoritmoGenetico {
 
 	public void introducirElite() {
 		Collections.sort(poblacion);
-		for(int i = numElite - 1; i >= 0; i--){
-			poblacion.remove(i);
-			poblacion.add(elite[i]);
-			fitness[i] = elite[i].getFitness();
+		for(int i = 0; i < numElite; i++){
+			poblacion.set(tamPoblacion-1-i,elite[i]);
+			//fitness[i] = elite[i].getFitness();
 		}
 		Collections.sort(poblacion);
 	}
@@ -97,10 +104,12 @@ public class AlgoritmoGenetico {
 	public double calcularMediaGen(){
 		int suma = 0;
 		for(int i = 0; i < tamPoblacion; i++){
-			suma += fitness[i];
+			suma += poblacion.get(i).getFitness();
 		}
 		return suma/tamPoblacion;
 	}
+
+	public double getMediaGen(){return mediaGen;}
 
 	public Individuo getMejorIndividuo(){
 		return elMejor;
@@ -121,14 +130,6 @@ public class AlgoritmoGenetico {
 
 	public void setPoblacion(ArrayList<Individuo> poblacion) {
 		this.poblacion = poblacion;
-	}
-
-	public double[] getFitness() {
-		return fitness;
-	}
-
-	public void setFitness(double[] fitness) {
-		this.fitness = fitness;
 	}
 
 	public int getMaxGeneraciones() {
@@ -161,10 +162,6 @@ public class AlgoritmoGenetico {
 
 	public void setTamTorneo(int tamTorneo) {
 		this.tamTorneo = tamTorneo;
-	}
-
-	public int getPos_mejor() {
-		return pos_mejor;
 	}
 
 	public Seleccion getSel() {
@@ -211,4 +208,10 @@ public class AlgoritmoGenetico {
 
 	public int getD() {return d;}
 	public void setD(int d){this.d = d;}
+
+	public Boolean esMejor(double a, double b){
+		if(func.toString().equalsIgnoreCase("Funcion 1"))
+			return a < b;
+		else return a > b;
+	}
 }

@@ -30,7 +30,7 @@ public class SeleccionTorneoAleatoria extends Seleccion{
             if(Math.random() > p)
                 seleccionados.add(torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == 1 ? torneo.get(0) : torneo.get(tamTorneo - 1));
             else
-                seleccionados.set(i, torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == -1 ? torneo.get(0) : torneo.get(tamTorneo - 1));
+                seleccionados.add( torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == -1 ? torneo.get(0) : torneo.get(tamTorneo - 1));
         }
         return seleccionados;
     }
