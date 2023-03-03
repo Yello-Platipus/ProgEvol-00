@@ -18,43 +18,55 @@ public class SeleccionRuleta extends Seleccion{
     }
 
     public ArrayList<Individuo> seleccionar(ArrayList<Individuo> poblacion, int tamTorneo){
-        int tamPoblacion = poblacion.size();
+        tamPoblacion = poblacion.size();
         ArrayList<Individuo> seleccionados = new ArrayList<Individuo>(tamPoblacion);
-        double[] probAcum = new double[tamPoblacion];
+        fitness = new double[tamPoblacion];
         double fitnessTotal = 0;
+        double[] probAcum = new double[tamPoblacion];
 
         Collections.sort(poblacion);
-        double pFitness = poblacion.get(tamPoblacion-1).getFitness();
-        if(pFitness >0)
-            pFitness = 0;
-        double pFitness2 = poblacion.get(0).getFitness();
-        if(pFitness2 < 0){
-            if(pFitness2 < pFitness)
-                pFitness = Math.abs(pFitness2);
-            else
-                pFitness = Math.abs(pFitness);
+        for(int i = 0; i < tamPoblacion; i++){
+            fitness[i] = poblacion.get(0).getFitness();
         }
 
-        for(int i = 0; i < tamPoblacion; i++){
-            fitnessTotal += poblacion.get(i).getFitness() + pFitness;
-            //probAcum[i] = fitnessTotal;
+        int q = 1;
+        while(fitness[0] == fitness[q]){
+            q++;
+            if(fitness[0] > fitness[q])
+                corregirMinimizar(fitness[0]);
+            else if(fitness[0] < fitness[q])
+                corregirMaximizar(fitness[0]);
         }
-        for(int i = 0; i < tamPoblacion; i++){
-            probAcum[i] = (poblacion.get(i).getFitness() + pFitness) / fitnessTotal;
-            if(i > 0){
+        for(int i = 0 ; i < tamPoblacion; i++){
+            fitnessTotal = fitness[i];
+        }
+        for(int i = 0 ; i < tamPoblacion; i++){
+            probAcum[i] = fitness[i]/fitnessTotal;
+            if(i > 0)
                 probAcum[i] += probAcum[i-1];
-            }
         }
 
         for(int i = 0; i < tamPoblacion; i++){
-            double aleatorio = Math.random();
+            double aleatorio = Math.random() * fitnessTotal;
             for(int j = 0; j < tamPoblacion; j++){
                 if(aleatorio < probAcum[j]){
-                    seleccionados.add(poblacion.get(j-1).clonar());
+                    seleccionados.add(poblacion.get(j).clonar());
                     break;
                 }
             }
         }
         return seleccionados;
+    }
+
+    @Override
+    public void corregirMinimizar(double max) {
+        for(int i = 0; i < this.tamPoblacion; i++)
+            this.fitness[i] = (1.05 * max) - this.fitness[i];
+    }
+
+    @Override
+    public void corregirMaximizar(double min) {
+        for(int i = 0; i < this.tamPoblacion; i++)
+            this.fitness[i] = this.fitness[i] + Math.abs(min);
     }
 }

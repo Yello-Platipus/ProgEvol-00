@@ -49,7 +49,6 @@ public class Controller {
             i++;
         }
     }
-    // a
     private void setGrafica(int i){
         numGen[i] = i;
         mediaGen[i] = ag.getMediaGen();
