@@ -25,6 +25,10 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
         super(ind);
     }
 
+    public IndividuoFuncion2(Individuo ind, Boolean[] cromosoma){
+        super(ind, cromosoma);
+    }
+
     public double getValor() {
         double xi[] = new double[d];
         double result = 0;
@@ -54,7 +58,6 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
     public void setCromosoma(int i, Boolean o) {
         cromosoma[i] = o;
     }
-
     @Override
     public int compareTo(Individuo o) { //Minimizar
         if(this.getFitness() > o.getFitness())
@@ -69,5 +72,9 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
 
     public Individuo clonar(){
         return new IndividuoFuncion2(this);
+    }
+
+    public Individuo getHijo(Boolean[] cromosoma) {
+        return new IndividuoFuncion2(this,cromosoma);
     }
 }

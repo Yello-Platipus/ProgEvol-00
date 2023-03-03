@@ -2,6 +2,8 @@ package Cositas.Cruce;
 
 import Cositas.Individuo.Individuo;
 
+import java.util.ArrayList;
+
 public class CruceUniforme extends Cruce{
     @Override
     public String toString() {
@@ -9,17 +11,9 @@ public class CruceUniforme extends Cruce{
     }
 
     @Override
-    public void cruzar(Individuo i1, Individuo i2) {
-
-        for(int i = 0; i < i1.getCromosoma().length; i++){
-            if(Math.random() < 0.5){ //0.5 por poner un numero
-                Object aux = i1.getCromosoma()[i];
-                Object aux1 = i2.getCromosoma()[i];
-                i1.setCromosoma(i,aux1);
-                i2.setCromosoma(i,aux);
-
-            }
-
-        }
+    public ArrayList<Individuo> cruzar(ArrayList<Individuo> poblacion, double probCruce) {
+        return null;
     }
+
+
 }

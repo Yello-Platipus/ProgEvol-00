@@ -1,10 +1,14 @@
 package Cositas;
 
 import Cositas.Cruce.Cruce;
+import Cositas.Cruce.CruceMonopunto;
 import Cositas.Funcion.Funcion;
+import Cositas.Funcion.Funcion1;
 import Cositas.Individuo.Individuo;
 import Cositas.Mutacion.Mutacion;
+import Cositas.Mutacion.MutacionBasica;
 import Cositas.Seleccion.Seleccion;
+import Cositas.Seleccion.SeleccionRuleta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +46,11 @@ public class AlgoritmoGenetico {
 		this.elitismo = 0.05;
 		this.d = 2;
 		this.tamTorneo = 3;
+		this.sel = new SeleccionRuleta();
+		this.cruce = new CruceMonopunto();
+		this.mut = new MutacionBasica();
+		this.func = new Funcion1();
+
 	}
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutacion, double precision){
 		this.tamPoblacion = tamPoblacion;
@@ -49,6 +58,7 @@ public class AlgoritmoGenetico {
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
 		this.precision = precision;
+
 	}
 
 	public void evalPob(){
@@ -77,12 +87,8 @@ public class AlgoritmoGenetico {
 		poblacion = sel.seleccionar(poblacion, tamTorneo);
 	}
 	public void cruzPob(){
-		Collections.shuffle(poblacion);
-		for(int i = 0; i < tamPoblacion - 1; i += 2){
-			if(Math.random() < probCruce){
-				cruce.cruzar(poblacion.get(i), poblacion.get(i+1));
-			}
-		}
+		poblacion = cruce.cruzar(poblacion, probCruce);
+
 	}
 	public void mutPob(){
 		for(int i = 0; i < tamPoblacion; i++){

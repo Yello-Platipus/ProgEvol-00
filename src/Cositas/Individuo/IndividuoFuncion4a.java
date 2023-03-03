@@ -25,6 +25,9 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
     public IndividuoFuncion4a(IndividuoFuncion4a ind){
         super(ind);
     }
+    public IndividuoFuncion4a(Individuo ind, Boolean[] cromosoma){
+        super(ind, cromosoma);
+    }
 
     public double getValor() {
         double xi[] = new double[d];
@@ -67,5 +70,9 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
 
     public Individuo clonar(){
         return new IndividuoFuncion4a(this);
+    }
+
+    public Individuo getHijo(Boolean[] cromosoma) {
+        return new IndividuoFuncion4a(this,cromosoma);
     }
 }

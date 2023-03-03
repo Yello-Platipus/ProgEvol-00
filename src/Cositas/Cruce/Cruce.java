@@ -2,7 +2,9 @@ package Cositas.Cruce;
 
 import Cositas.Individuo.Individuo;
 
+import java.util.ArrayList;
+
 public abstract class Cruce {
     public abstract String toString();
-    public abstract void cruzar(Individuo i1, Individuo i2);
+    public abstract ArrayList<Individuo> cruzar(ArrayList<Individuo>  poblacion, double probCruce);
 }

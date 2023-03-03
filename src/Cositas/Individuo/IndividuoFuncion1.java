@@ -22,6 +22,8 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 
 	public IndividuoFuncion1(Individuo ind){
 		super(ind);
+	}public IndividuoFuncion1(Individuo ind, Boolean[] cromosoma){
+		super(ind, cromosoma);
 	}
 	public double getValor() {
 		double x1 = this.getFenotipo(0), x2 = this.getFenotipo(1);
@@ -60,4 +62,9 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 	}
 	@Override
 	public Individuo clonar(){return new IndividuoFuncion1(this);}
+
+	@Override
+	public Individuo getHijo(Boolean[] cromosoma) {
+		return new IndividuoFuncion1(this,cromosoma);
+	}
 }

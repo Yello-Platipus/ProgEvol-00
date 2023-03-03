@@ -19,7 +19,9 @@ public class IndividuoFuncion4b extends Individuo<Double>{
     }
 
     public IndividuoFuncion4b(Individuo ind){super(ind);}
-
+    public IndividuoFuncion4b(Individuo ind, Double[] cromosoma){
+        super(ind, cromosoma);
+    }
     public double getValor() {
         double sumatorio = 0;
         for(int i = 0; i < d; i++){
@@ -57,4 +59,8 @@ public class IndividuoFuncion4b extends Individuo<Double>{
         return getMin()[0] + (getMax()[0] - getMin()[0]) * getRand().nextDouble();
     }
     public Individuo clonar(){return new IndividuoFuncion4b(this);}
+
+    public Individuo getHijo(Double[] cromosoma) {
+        return new IndividuoFuncion4b(this,cromosoma);
+    }
 }
