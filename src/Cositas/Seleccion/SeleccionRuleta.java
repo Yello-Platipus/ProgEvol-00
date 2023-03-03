@@ -27,7 +27,7 @@ public class SeleccionRuleta extends Seleccion{
         double pFitness = Math.abs(poblacion.get(tamPoblacion-1).getFitness());
 
         for(int i = 0; i < tamPoblacion; i++){
-            fitnessTotal += poblacion.get(i).getFitness() + pFitness;
+            fitnessTotal += poblacion.get(i).getFitness();
             fitnessAcumulado[i] = fitnessTotal;
         }
         for(int i = 0; i < tamPoblacion; i++){
