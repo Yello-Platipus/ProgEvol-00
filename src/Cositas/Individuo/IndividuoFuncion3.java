@@ -21,7 +21,15 @@ public class IndividuoFuncion3 extends Individuo<Boolean>{
         this.cromosoma = new Boolean[tamTotal];
         for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = getRand().nextBoolean();
     }
-    public IndividuoFuncion3(Individuo ind){super(ind);}
+    public IndividuoFuncion3(Individuo ind){
+        super(ind);
+        int tamTotal = 0;
+        for(int i = 0; i< d; i++)
+            tamTotal += tamGenes[i];
+        this.cromosoma = new Boolean[tamTotal];
+        for (int i = 0; i < tamTotal; i++)
+            this.cromosoma[i] = (Boolean) ind.getCromosoma()[i];
+    }
 
     public IndividuoFuncion3(Individuo ind, Boolean[] cromosoma){
         super(ind, cromosoma);

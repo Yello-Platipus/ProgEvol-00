@@ -24,6 +24,12 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
 
     public IndividuoFuncion4a(IndividuoFuncion4a ind){
         super(ind);
+        int tamTotal = 0;
+        for(int i = 0; i< d; i++)
+            tamTotal += tamGenes[i];
+        this.cromosoma = new Boolean[tamTotal];
+        for (int i = 0; i < tamTotal; i++)
+            this.cromosoma[i] = (Boolean) ind.getCromosoma()[i];
     }
     public IndividuoFuncion4a(Individuo ind, Boolean[] cromosoma){
         super(ind, cromosoma);

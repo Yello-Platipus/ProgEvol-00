@@ -17,12 +17,18 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 		this.tamGenes[1] = this.tamGen(min[1], max[1]);
 		int tamTotal = tamGenes[0] + tamGenes[1];
 		this.cromosoma = new Boolean[tamTotal];
-		for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = getRand().nextBoolean();
+		for (int i = 0; i < tamTotal; i++)
+			this.cromosoma[i] = getRand().nextBoolean();
 	}
 
 	public IndividuoFuncion1(Individuo ind){
 		super(ind);
-	}public IndividuoFuncion1(Individuo ind, Boolean[] cromosoma){
+		int tamTotal = tamGenes[0] + tamGenes[1];
+		this.cromosoma = new Boolean[tamTotal];
+		for (int i = 0; i < tamTotal; i++)
+			this.cromosoma[i] = getRand().nextBoolean();
+	}
+	public IndividuoFuncion1(Individuo ind, Boolean[] cromosoma){
 		super(ind, cromosoma);
 	}
 	public double getValor() {

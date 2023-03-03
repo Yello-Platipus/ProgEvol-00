@@ -39,7 +39,6 @@ public class Controller {
         mejorInd = ag.getMejorIndividuo().toString();
 
         while(i <= maxGen) {
-
             ag.generarElite();
             ag.selPob();
             ag.cruzPob();

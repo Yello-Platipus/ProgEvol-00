@@ -23,6 +23,12 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
 
     public IndividuoFuncion2(IndividuoFuncion2 ind){
         super(ind);
+        int tamTotal = 0;
+        for(int i = 0; i< d; i++)
+            tamTotal += tamGenes[i];
+        this.cromosoma = new Boolean[tamTotal];
+        for (int i = 0; i < tamTotal; i++)
+            this.cromosoma[i] = (Boolean) ind.getCromosoma()[i];
     }
 
     public IndividuoFuncion2(Individuo ind, Boolean[] cromosoma){

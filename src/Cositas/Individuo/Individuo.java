@@ -19,11 +19,19 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	}
 	public Individuo(Individuo ind){
 		this.d = ind.getD();
-		this.max = ind.getMax();
-		this.min = ind.getMin();
+		this.max = new double[d];
+		this.min = new double[d];
 		this.precision = ind.getPrecision();
-		this.cromosoma = (T[]) ind.getCromosoma();
-		this.tamGenes = ind.getTamGenes();
+		for(int i = 0; i < d; i++){
+			this.max[i] = ind.getMax()[i];
+			this.min[i] = ind.getMin()[i];
+		}
+		int sum = 0;
+		for(int i : ind.getTamGenes())
+			sum += 1;
+		this.tamGenes = new int[sum];
+		for(int i = 0; i < sum; i++)
+			this.tamGenes[i] = ind.getTamGenes()[i];
 	}
 
 	public Individuo(Individuo ind, T[] cromosoma){

@@ -18,7 +18,15 @@ public class IndividuoFuncion4b extends Individuo<Double>{
         for (int i = 0; i < d; i++) this.cromosoma[i] = this.getRand().nextDouble()*max[0];
     }
 
-    public IndividuoFuncion4b(Individuo ind){super(ind);}
+    public IndividuoFuncion4b(Individuo ind){
+        super(ind);
+        int tamTotal = 0;
+        for(int i = 0; i< d; i++)
+            tamTotal += tamGenes[i];
+        this.cromosoma = new Double[tamTotal];
+        for (int i = 0; i < tamTotal; i++)
+            this.cromosoma[i] = (Double) ind.getCromosoma()[i];
+    }
     public IndividuoFuncion4b(Individuo ind, Double[] cromosoma){
         super(ind, cromosoma);
     }
