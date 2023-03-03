@@ -31,7 +31,7 @@ public class Controller {
 
         int i = 1;
         ag.initPob();
-        ag.evalPob();
+         ag.evalPob();
         numGen[0] = 0;
         mediaGen[0] = ag.getMediaGen();
         mejorGen[0] = ag.getMejorFitness();

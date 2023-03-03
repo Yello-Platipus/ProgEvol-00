@@ -4,6 +4,7 @@ import Cositas.Cruce.Cruce;
 import Cositas.Cruce.CruceMonopunto;
 import Cositas.Funcion.Funcion;
 import Cositas.Funcion.Funcion1;
+import Cositas.Funcion.Funcion3;
 import Cositas.Individuo.Individuo;
 import Cositas.Mutacion.Mutacion;
 import Cositas.Mutacion.MutacionBasica;
@@ -49,7 +50,7 @@ public class AlgoritmoGenetico {
 		this.sel = new SeleccionRuleta();
 		this.cruce = new CruceMonopunto();
 		this.mut = new MutacionBasica();
-		this.func = new Funcion1();
+		this.func = new Funcion3();
 
 	}
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutacion, double precision){
