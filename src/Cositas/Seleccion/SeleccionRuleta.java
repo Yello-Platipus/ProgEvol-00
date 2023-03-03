@@ -20,7 +20,7 @@ public class SeleccionRuleta extends Seleccion{
     public ArrayList<Individuo> seleccionar(ArrayList<Individuo> poblacion, int tamTorneo){
         int tamPoblacion = poblacion.size();
         ArrayList<Individuo> seleccionados = new ArrayList<Individuo>(tamPoblacion);
-        double[] fitnessAcumulado = new double[tamPoblacion];
+        double[] probAcum = new double[tamPoblacion];
         double fitnessTotal = 0;
 
         Collections.sort(poblacion);
@@ -37,13 +37,20 @@ public class SeleccionRuleta extends Seleccion{
 
         for(int i = 0; i < tamPoblacion; i++){
             fitnessTotal += poblacion.get(i).getFitness() + pFitness;
-            fitnessAcumulado[i] = fitnessTotal;
+            //probAcum[i] = fitnessTotal;
         }
         for(int i = 0; i < tamPoblacion; i++){
-            double aleatorio = Math.random() * fitnessTotal;
+            probAcum[i] = (poblacion.get(i).getFitness() + pFitness) / fitnessTotal;
+            if(i > 0){
+                probAcum[i] += probAcum[i-1];
+            }
+        }
+
+        for(int i = 0; i < tamPoblacion; i++){
+            double aleatorio = Math.random();
             for(int j = 0; j < tamPoblacion; j++){
-                if(aleatorio < fitnessAcumulado[j]){
-                    seleccionados.add(poblacion.get(j).clonar());
+                if(aleatorio < probAcum[j]){
+                    seleccionados.add(poblacion.get(j-1).clonar());
                     break;
                 }
             }
