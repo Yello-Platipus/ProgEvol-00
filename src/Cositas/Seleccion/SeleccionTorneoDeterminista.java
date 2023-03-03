@@ -21,12 +21,13 @@ public class SeleccionTorneoDeterminista  extends Seleccion{
 
     @Override
     public ArrayList<Individuo> seleccionar(ArrayList<Individuo> poblacion, int tamTorneo) {
-        ArrayList<Individuo> ret = new ArrayList<Individuo>(tamTorneo);
+        int tamPoblacion = poblacion.size();
+        ArrayList<Individuo> ret = new ArrayList<Individuo>(tamPoblacion);
 
-        for(int i = 0; i < tamTorneo; i++){
+        for(int i = 0; i < tamPoblacion; i++){
             ArrayList<Individuo> aux = new ArrayList<Individuo>(k);
             for(int j = 0; j < k; j++){
-                aux.add(poblacion.get((int) (Math.random() * tamTorneo)));
+                aux.add(poblacion.get((int) (Math.random() * tamPoblacion)));
             }
             Collections.sort(aux);
             ret.add(aux.get(0).clonar());
