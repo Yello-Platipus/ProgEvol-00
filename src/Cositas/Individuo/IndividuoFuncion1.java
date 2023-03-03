@@ -20,6 +20,9 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 		for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextBoolean();
 	}
 
+	public IndividuoFuncion1(Individuo ind){
+		super(ind);
+	}
 	public double getValor() {
 		double x1 = this.getFenotipo(0), x2 = this.getFenotipo(1);
 		return (21.5 + x1 * Math.sin(4 * Math.PI * x1) + x2 * Math.sin(20 * Math.PI * x2));
@@ -55,4 +58,6 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 	public Boolean nextRandom(){
 		return rand.nextBoolean();
 	}
+	@Override
+	public Individuo clonar(){return new IndividuoFuncion1(this);}
 }

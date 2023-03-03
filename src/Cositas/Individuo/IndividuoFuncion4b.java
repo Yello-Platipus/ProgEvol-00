@@ -18,6 +18,8 @@ public class IndividuoFuncion4b extends Individuo<Double>{
         for (int i = 0; i < d; i++) this.cromosoma[i] = this.rand.nextDouble()*max[0];
     }
 
+    public IndividuoFuncion4b(Individuo ind){super(ind);}
+
     public double getValor() {
         double sumatorio = 0;
         for(int i = 0; i < d; i++){
@@ -54,4 +56,5 @@ public class IndividuoFuncion4b extends Individuo<Double>{
     public Double nextRandom(){
         return getMin()[0] + (getMax()[0] - getMin()[0])*rand.nextDouble();
     }
+    public Individuo clonar(){return new IndividuoFuncion4b(this);}
 }

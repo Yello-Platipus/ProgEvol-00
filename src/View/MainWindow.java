@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import org.math.plot.*;
+import org.math.plot.plots.LinePlot;
 
 public class MainWindow extends JFrame {
     private Controller cont;
@@ -49,7 +50,8 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cPanel.initialize();
                 cont.run(ag);
-
+                plot.removeAll();
+                plot = new Plot2DPanel();
                 iniGrafica();
                 mSol = cont.getMejorIndAbs().toString();
                 mejorSol.setText(mSol);
@@ -132,6 +134,7 @@ public class MainWindow extends JFrame {
 
     public void iniGrafica(){
         // define your data
+
         numGen = cont.getNumGen();
         mejorGen = cont.getMejorGen();
         mejorAbs = cont.getMejorAbs();

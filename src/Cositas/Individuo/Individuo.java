@@ -19,6 +19,24 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 		this.precision = precision;
 		this.d = d;
 	}
+	public Individuo(Individuo ind){
+		this.d = ind.getD();
+		this.max = ind.getMax();
+		this.min = ind.getMin();
+		this.precision = ind.getPrecision();
+		this.cromosoma = (T[]) ind.getCromosoma();
+		this.tamGenes = ind.getTamGenes();
+		this.rand = ind.getRand();
+	}
+
+	private int[] getTamGenes() { return tamGenes;
+	}
+
+	private double getPrecision() { return precision;
+	}
+
+	private int getD() {return d;
+	}
 
 	public abstract double getFitness();
 	

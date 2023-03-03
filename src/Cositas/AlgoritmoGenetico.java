@@ -88,7 +88,7 @@ public class AlgoritmoGenetico {
 		elite = new Individuo[numElite];
 		Collections.sort(poblacion);
 		for(int i = 0; i < numElite; i++){
-			elite[i] = poblacion.get(i);
+			elite[i] = poblacion.get(i).clonar();
 		}
 	}
 

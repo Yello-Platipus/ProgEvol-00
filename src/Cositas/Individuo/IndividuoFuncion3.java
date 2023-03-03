@@ -21,7 +21,7 @@ public class IndividuoFuncion3 extends Individuo<Boolean>{
         this.cromosoma = new Boolean[tamTotal];
         for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextBoolean();
     }
-
+    public IndividuoFuncion3(Individuo ind){super(ind);}
     public double getValor() {
         double xi[] = new double[d];
 
@@ -61,6 +61,7 @@ public class IndividuoFuncion3 extends Individuo<Boolean>{
     public Boolean nextRandom(){
         return rand.nextBoolean();
     }
+    public Individuo clonar(){return new IndividuoFuncion3(this);}
 }
 
 
