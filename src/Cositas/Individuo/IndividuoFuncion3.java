@@ -6,7 +6,7 @@ public class IndividuoFuncion3 extends Individuo<Boolean>{
     private int d;
     public IndividuoFuncion3(double precision,int d) {
         super(precision, d);
-        this.d = 2;
+        d = 2;
         tamGenes = new int[d];
         min = new double[d];
         max = new double[d];
@@ -24,7 +24,6 @@ public class IndividuoFuncion3 extends Individuo<Boolean>{
     public IndividuoFuncion3(Individuo ind){
         super(ind);
         int tamTotal = 0;
-        this.d = 2;
         for(int i = 0; i< d; i++)
             tamTotal += tamGenes[i];
         this.cromosoma = new Boolean[tamTotal];
