@@ -17,6 +17,9 @@ public class CruceMonopunto extends Cruce{
             Individuo padre1, padre2;
             padre1 = poblacion.get(i);
             padre2 = poblacion.get(i + 1);
+            Individuo hijo1, hijo2;
+            hijo1 = padre1.clonar();
+            hijo2 = padre2.clonar();
             if(Math.random() < probCruce){
 
                 Object[] c1 = padre1.getCromosoma();
@@ -35,21 +38,16 @@ public class CruceMonopunto extends Cruce{
                     cAux1[c] = c2[c];
                     cAux2[c] = c1[c];
                 }
-                Individuo hijo1, hijo2;
-                hijo1 = padre1.clonar();
-                hijo2 = padre2.clonar();
+
 
                 for(int c = 0; c < tam; c++){
                     hijo1.setCromosoma(c,cAux1[c]);
                     hijo2.setCromosoma(c,cAux2[c]);
                 }
-                cruzados.add(hijo1);
-                cruzados.add(hijo2);
+
             }
-            else {
-                cruzados.add(padre1.clonar());
-                cruzados.add(padre2.clonar());
-            }
+            cruzados.add(hijo1);
+            cruzados.add(hijo2);
 
         }
     return cruzados;

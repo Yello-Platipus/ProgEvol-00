@@ -75,10 +75,13 @@ public class MainWindow extends JFrame {
         });
 
         mejorSol = new JLabel(mSol);
+        JScrollPane sPane = new JScrollPane();
+        sPane.setViewportView(mejorSol);
         JPanel panelSur = new JPanel(new BorderLayout());
+        ejecBoton.setFont(new Font("Arial", Font.PLAIN, 20));
         panelSur.add(ejecBoton, BorderLayout.EAST);
-        panelSur.add(mejorSol, BorderLayout.CENTER);
-        panelSur.add(resetBoton, BorderLayout.WEST);
+        panelSur.add(sPane, BorderLayout.CENTER);
+        //panelSur.add(resetBoton, BorderLayout.WEST);
 
         //this.setSize(1920,1080);
         this.add(panelSur, BorderLayout.SOUTH);
