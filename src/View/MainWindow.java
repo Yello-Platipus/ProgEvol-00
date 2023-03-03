@@ -49,7 +49,7 @@ public class MainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cPanel.initialize();
                 cont.run(ag);
-                plot = new Plot2DPanel();
+
                 iniGrafica();
                 mSol = cont.getMejorIndAbs().toString();
                 mejorSol.setText(mSol);

@@ -51,4 +51,7 @@ public class IndividuoFuncion4b extends Individuo<Double>{
             return -1;
         return 0;
     }
+    public Double nextRandom(){
+        return getMin()[0] + (getMax()[0] - getMin()[0])*rand.nextDouble();
+    }
 }

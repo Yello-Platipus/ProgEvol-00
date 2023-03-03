@@ -13,9 +13,10 @@ public class CruceMonopunto extends Cruce{
         int tam = i1.getCromosoma().length;
         int corte = (int) (Math.random() * tam);
         for(int i = corte; i < tam; i++) {
-            Object aux2 = i1.getCromosoma()[i];
-            i1.setCromosoma(i, i2.getCromosoma()[i]);
-            i2.setCromosoma(i,aux2);
+            Object aux2 = i2.getCromosoma()[i];
+            Object aux1 = i1.getCromosoma()[i];
+            i1.setCromosoma(i,aux2);
+            i2.setCromosoma(i,aux1);
         }
     }
 }

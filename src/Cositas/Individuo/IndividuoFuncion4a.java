@@ -57,4 +57,7 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
             return -1;
         return 0;
     }
+    public Boolean nextRandom(){
+        return rand.nextBoolean();
+    }
 }

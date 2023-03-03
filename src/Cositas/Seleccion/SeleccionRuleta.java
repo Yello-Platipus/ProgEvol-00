@@ -22,6 +22,7 @@ public class SeleccionRuleta extends Seleccion{
         ArrayList<Individuo> seleccionados = new ArrayList<Individuo>(tamPoblacion);
         double[] fitnessAcumulado = new double[tamPoblacion];
         double fitnessTotal = 0;
+
         Collections.sort(poblacion);
         double pFitness = Math.abs(poblacion.get(tamPoblacion-1).getFitness());
 
