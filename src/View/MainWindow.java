@@ -109,7 +109,7 @@ public class MainWindow extends JFrame {
                 "sel", new Seleccion[]{new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
                                                 new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionRestos()}));
         cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
-                "Tamaño del torneo", "Tamaño de torneo de la seleccion por torneo",
+                "Tamanyo del torneo", "Tamanyo de torneo de la seleccion por torneo",
                 "tamTorneo", 1, Integer.MAX_VALUE));
         cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "d", "Dimensiones de la funcion 4",

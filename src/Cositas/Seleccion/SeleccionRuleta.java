@@ -24,10 +24,19 @@ public class SeleccionRuleta extends Seleccion{
         double fitnessTotal = 0;
 
         Collections.sort(poblacion);
-        double pFitness = Math.abs(poblacion.get(tamPoblacion-1).getFitness());
+        double pFitness = poblacion.get(tamPoblacion-1).getFitness();
+        if(pFitness >0)
+            pFitness = 0;
+        double pFitness2 = poblacion.get(0).getFitness();
+        if(pFitness2 < 0){
+            if(pFitness2 < pFitness)
+                pFitness = Math.abs(pFitness2);
+            else
+                pFitness = Math.abs(pFitness);
+        }
 
         for(int i = 0; i < tamPoblacion; i++){
-            fitnessTotal += poblacion.get(i).getFitness();
+            fitnessTotal += poblacion.get(i).getFitness() + pFitness;
             fitnessAcumulado[i] = fitnessTotal;
         }
         for(int i = 0; i < tamPoblacion; i++){

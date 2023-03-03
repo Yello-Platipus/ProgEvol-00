@@ -5,7 +5,7 @@ import Util.Converter;
 public class IndividuoFuncion2 extends Individuo<Boolean>{
     public IndividuoFuncion2(double precision,int d) {
         super(precision, d);
-        d = 2;
+        this.d = 2;
         tamGenes = new int[d];
         min = new double[d];
         max = new double[d];
@@ -24,6 +24,7 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
     public IndividuoFuncion2(IndividuoFuncion2 ind){
         super(ind);
         int tamTotal = 0;
+        this.d = 2;
         for(int i = 0; i< d; i++)
             tamTotal += tamGenes[i];
         this.cromosoma = new Boolean[tamTotal];
@@ -37,15 +38,14 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
 
     public double getValor() {
         double xi[] = new double[d];
-        double result = 0;
         double sumatorio = 0;
-        double productorio = 0;
+        double productorio = 1;
         for(int i = 0; i < d; i++){
             xi[i] = getFenotipo(i);
             sumatorio += Math.pow(xi[i],2)/4000;
             productorio *= Math.cos(xi[i]/Math.sqrt(i+1));
        }
-       return sumatorio - productorio - 1;
+       return sumatorio - productorio + 1;
     }
 
     public double getFitness() {
