@@ -27,14 +27,14 @@ public class SeleccionRuleta extends Seleccion{
         double pFitness = Math.abs(poblacion.get(tamPoblacion-1).getFitness());
 
         for(int i = 0; i < tamPoblacion; i++){
-            fitnessTotal += poblacion.get(i).getFitness() + pFitness;
+            fitnessTotal += poblacion.get(i).getFitness();
             fitnessAcumulado[i] = fitnessTotal;
         }
         for(int i = 0; i < tamPoblacion; i++){
             double aleatorio = Math.random() * fitnessTotal;
             for(int j = 0; j < tamPoblacion; j++){
                 if(aleatorio < fitnessAcumulado[j] ){
-                    seleccionados.add(poblacion.get(i).clonar());
+                    seleccionados.add(poblacion.get(j).clonar());
                     break;
                 }
             }

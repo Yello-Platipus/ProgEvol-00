@@ -9,13 +9,11 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	protected int[] tamGenes;
 	protected double min[];
 	protected double max[];
-	protected Random rand;
 	protected double precision;
 	protected int d;
 	//protected Comparator comp;
 
 	public Individuo(double precision,int d) {
-		this.rand = new Random();
 		this.precision = precision;
 		this.d = d;
 	}
@@ -26,7 +24,6 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 		this.precision = ind.getPrecision();
 		this.cromosoma = (T[]) ind.getCromosoma();
 		this.tamGenes = ind.getTamGenes();
-		this.rand = ind.getRand();
 	}
 
 	private int[] getTamGenes() { return tamGenes;
@@ -52,7 +49,9 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 		return cromosoma;
 	}
 
-	public Random getRand(){return rand;}
+	public Random getRand(){
+		return new Random();
+	}
 
 	public String toString(){
 		int n = tamGenes.length;

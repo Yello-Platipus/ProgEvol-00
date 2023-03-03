@@ -12,7 +12,7 @@ public class MutacionBasica extends Mutacion{
         boolean cambios = false;
         Object cromosoma[] = ind.getCromosoma();
         for(int i = 0; i < cromosoma.length; i++){
-            if(ind.getRand().nextDouble() < probMutacion){
+            if(Math.random() < probMutacion){
                 cromosoma[i] = ind.nextRandom();
                 cambios = true;
             }

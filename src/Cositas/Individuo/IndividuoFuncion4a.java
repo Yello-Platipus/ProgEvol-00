@@ -19,7 +19,7 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
         }
 
         this.cromosoma = new Boolean[tamTotal];
-        for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextBoolean();
+        for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = getRand().nextBoolean();
     }
 
     public IndividuoFuncion4a(IndividuoFuncion4a ind){
@@ -62,7 +62,7 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
         return 0;
     }
     public Boolean nextRandom(){
-        return rand.nextBoolean();
+        return getRand().nextBoolean();
     }
 
     public Individuo clonar(){

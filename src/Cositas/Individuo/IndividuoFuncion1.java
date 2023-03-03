@@ -17,7 +17,7 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 		this.tamGenes[1] = this.tamGen(min[1], max[1]);
 		int tamTotal = tamGenes[0] + tamGenes[1];
 		this.cromosoma = new Boolean[tamTotal];
-		for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextBoolean();
+		for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = getRand().nextBoolean();
 	}
 
 	public IndividuoFuncion1(Individuo ind){
@@ -56,7 +56,7 @@ public class IndividuoFuncion1 extends Individuo<Boolean> {
 		return 0;
 	}
 	public Boolean nextRandom() {
-		return rand.nextBoolean();
+		return getRand().nextBoolean();
 	}
 	@Override
 	public Individuo clonar(){return new IndividuoFuncion1(this);}

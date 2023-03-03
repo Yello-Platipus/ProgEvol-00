@@ -3,6 +3,7 @@ package Cositas.Seleccion;
 import Cositas.Individuo.Individuo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class SeleccionTorneoDeterminista  extends Seleccion{
@@ -27,7 +28,7 @@ public class SeleccionTorneoDeterminista  extends Seleccion{
             for(int j = 0; j < k; j++){
                 aux.add(poblacion.get((int) (Math.random() * tamTorneo)));
             }
-            aux.sort(Individuo::compareTo);
+            Collections.sort(aux);
             ret.add(aux.get(0).clonar());
         }
 
