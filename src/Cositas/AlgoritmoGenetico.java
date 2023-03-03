@@ -42,9 +42,9 @@ public class AlgoritmoGenetico {
 		this.tamPoblacion = 100;
 		this.maxGeneraciones = 100;
 		this.probCruce = 0.6;
-		this.probMutacion = 0.01;
-		this.precision = 0.0001;
-		this.elitismo = 0.05;
+		this.probMutacion = 0.05;
+		this.precision = 0.001;
+		this.elitismo = 0.0;
 		this.d = 2;
 		this.tamTorneo = 3;
 		this.sel = new SeleccionRuleta();
