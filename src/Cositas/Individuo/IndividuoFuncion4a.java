@@ -22,6 +22,10 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
         for (int i = 0; i < tamTotal; i++) this.cromosoma[i] = this.rand.nextBoolean();
     }
 
+    public IndividuoFuncion4a(IndividuoFuncion4a ind){
+        super(ind);
+    }
+
     public double getValor() {
         double xi[] = new double[d];
         double sumatorio = 0;
@@ -59,5 +63,9 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
     }
     public Boolean nextRandom(){
         return rand.nextBoolean();
+    }
+
+    public Individuo clonar(){
+        return new IndividuoFuncion4a(this);
     }
 }

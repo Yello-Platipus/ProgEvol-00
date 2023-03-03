@@ -18,7 +18,7 @@ public class SeleccionTruncamiento extends Seleccion{
         ArrayList<Individuo> seleccionados = new ArrayList<>();
         poblacion.sort(Individuo::compareTo);
         for (int i = 0; i < tamPoblacion; i++) {
-            seleccionados.add(poblacion.get(i % tamTrunc));
+            seleccionados.add(poblacion.get(i % tamTrunc).clonar());
         }
         return seleccionados;
     }

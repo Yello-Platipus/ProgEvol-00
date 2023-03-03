@@ -71,4 +71,6 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	public abstract void setCromosoma(int i, T o);
 
 	public abstract T nextRandom();
+
+	public abstract Individuo clonar();
 }

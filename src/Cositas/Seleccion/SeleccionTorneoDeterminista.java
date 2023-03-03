@@ -21,17 +21,14 @@ public class SeleccionTorneoDeterminista  extends Seleccion{
     @Override
     public ArrayList<Individuo> seleccionar(ArrayList<Individuo> poblacion, int tamTorneo) {
         ArrayList<Individuo> ret = new ArrayList<Individuo>(tamTorneo);
-        ArrayList<Individuo> aux = new ArrayList<Individuo>(k);
 
         for(int i = 0; i < tamTorneo; i++){
+            ArrayList<Individuo> aux = new ArrayList<Individuo>(k);
             for(int j = 0; j < k; j++){
-                aux.set(j, poblacion.get((int) (Math.random() * tamTorneo)));
+                aux.add(poblacion.get((int) (Math.random() * tamTorneo)));
             }
-            ret.set(i, aux.get(0));
-            for(int j = 1; j < k; j++){
-                if(aux.get(j).getFitness() > ret.get(i).getFitness())
-                    ret.set(i, aux.get(j));
-            }
+            aux.sort(Individuo::compareTo);
+            ret.add(aux.get(0).clonar());
         }
 
         return ret;

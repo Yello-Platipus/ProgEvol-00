@@ -28,9 +28,9 @@ public class SeleccionTorneoAleatoria extends Seleccion{
             Collections.sort(torneo);
 
             if(Math.random() > p)
-                seleccionados.add(torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == 1 ? torneo.get(0) : torneo.get(tamTorneo - 1));
+                seleccionados.add(torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == 1 ? torneo.get(0) : torneo.get(tamTorneo - 1).clonar());
             else
-                seleccionados.add( torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == -1 ? torneo.get(0) : torneo.get(tamTorneo - 1));
+                seleccionados.add( torneo.get(0).compareTo(torneo.get(tamTorneo - 1)) == -1 ? torneo.get(0) : torneo.get(tamTorneo - 1).clonar());
         }
         return seleccionados;
     }

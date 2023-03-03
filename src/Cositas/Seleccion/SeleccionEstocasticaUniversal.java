@@ -25,7 +25,7 @@ public class SeleccionEstocasticaUniversal extends Seleccion{
         for(int i = 0; i < tamPoblacion; i++){
             sum += poblacion.get(i).getFitness();
             while(sum > r){
-                seleccionados.add(poblacion.get(i));
+                seleccionados.add(poblacion.get(i).clonar());
                 r += 1 / tamPoblacion;
             }
         }

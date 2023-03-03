@@ -20,10 +20,10 @@ public class SeleccionRestos extends Seleccion{
 
         for (int i = 0; i < tamPoblacion; i++) {
             if(tamPoblacion * (poblacion.get(i).getFitness() / fitnessTotal) > 1)
-                seleccionados.add(poblacion.get(i));
+                seleccionados.add(poblacion.get(i).clonar());
         }
         while(seleccionados.size() < tamPoblacion) // El resto se selecciona de manera aleatoria
-            seleccionados.add(poblacion.get((int) (Math.random() * tamPoblacion)));
+            seleccionados.add(poblacion.get((int) (Math.random() * tamPoblacion)).clonar());
 
         return seleccionados;
     }
