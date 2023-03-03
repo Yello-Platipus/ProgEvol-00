@@ -14,8 +14,10 @@ public class CruceUniforme extends Cruce{
         for(int i = 0; i < i1.getCromosoma().length; i++){
             if(Math.random() < 0.5){ //0.5 por poner un numero
                 Object aux = i1.getCromosoma()[i];
-                i1.getCromosoma()[i] = i2.getCromosoma()[i];
-                i2.getCromosoma()[i] = aux;
+                Object aux1 = i2.getCromosoma()[i];
+                i1.setCromosoma(i,aux1);
+                i2.setCromosoma(i,aux);
+
             }
 
         }

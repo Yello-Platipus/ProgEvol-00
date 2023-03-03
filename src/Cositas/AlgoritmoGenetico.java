@@ -33,7 +33,16 @@ public class AlgoritmoGenetico {
 	private Mutacion mut;
 	private Funcion func;
 
-	public AlgoritmoGenetico(){}
+	public AlgoritmoGenetico(){
+		this.tamPoblacion = 100;
+		this.maxGeneraciones = 100;
+		this.probCruce = 0.6;
+		this.probMutacion = 0.01;
+		this.precision = 0.0001;
+		this.elitismo = 0.05;
+		this.d = 2;
+		this.tamTorneo = 3;
+	}
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutacion, double precision){
 		this.tamPoblacion = tamPoblacion;
 		this.maxGeneraciones = maxGeneraciones;

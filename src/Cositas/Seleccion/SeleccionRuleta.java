@@ -34,7 +34,7 @@ public class SeleccionRuleta extends Seleccion{
             double aleatorio = Math.random() * fitnessTotal;
             for(int j = 0; j < tamPoblacion; j++){
                 if(aleatorio < fitnessAcumulado[j] ){
-                    seleccionados.add(poblacion.get(i).clonar());
+                    seleccionados.add(poblacion.get(j).clonar());
                     break;
                 }
             }

@@ -34,7 +34,7 @@ public class MainWindow extends JFrame {
         cPanel = new ConfigPanel<AlgoritmoGenetico>();
         plot = new Plot2DPanel();
 
-        ag = new AlgoritmoGenetico(100,100,0.6,0.05,0.001);
+        ag = new AlgoritmoGenetico();
         cPanel.setTarget(ag);
         mSol = "            Mejor solucion: ";
         init();
