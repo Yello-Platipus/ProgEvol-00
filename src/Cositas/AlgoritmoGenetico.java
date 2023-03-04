@@ -118,7 +118,7 @@ public class AlgoritmoGenetico {
 	}
 
 	public double calcularMediaGen(){
-		int suma = 0;
+		double suma = 0;
 		for(int i = 0; i < tamPoblacion; i++){
 			suma += poblacion.get(i).getFitness();
 		}
