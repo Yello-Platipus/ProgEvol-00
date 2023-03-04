@@ -26,7 +26,6 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
         super(ind);
         int l = ind.getTamGenes().length;
         int tamTotal = 0;
-        this.d = 2;
         this.tamGenes = new int[l];
         for(int i = 0; i < l; i++) {
             this.tamGenes[i] = ind.getTamGenes()[i];
@@ -56,7 +55,7 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
     }
 
     public double getFenotipo(int x) {
-        return this.min[x] + Converter.bin2dec(cromosoma, tamGenes, x)*(this.max[x] - this.min[x])/(Math.pow(2,tamGenes[x]) - 1);
+        return this.min[x] + Converter.bin2dec(cromosoma, tamGenes, x)*(Math.PI - this.min[x])/(Math.pow(2,tamGenes[x]) - 1);
     }
 
     @Override

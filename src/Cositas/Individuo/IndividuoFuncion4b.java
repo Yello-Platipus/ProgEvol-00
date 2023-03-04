@@ -11,11 +11,10 @@ public class IndividuoFuncion4b extends Individuo<Double>{
         m = 10;
         for(int i = 0; i< d; i++){
             min[i] = 0;
-            max[i] = Math.PI;
         }
         tamGenes = new int[d];
         this.cromosoma = new Double[d];
-        for (int i = 0; i < d; i++) this.cromosoma[i] = this.getRand().nextDouble()*max[0];
+        for (int i = 0; i < d; i++) this.cromosoma[i] = this.getRand().nextDouble()*Math.PI;
     }
 
     public IndividuoFuncion4b(Individuo ind){
@@ -61,7 +60,7 @@ public class IndividuoFuncion4b extends Individuo<Double>{
         return 0;
     }
     public Double nextRandom(){
-        return getMin()[0] + (getMax()[0] - getMin()[0]) * getRand().nextDouble();
+        return getMin()[0] + (Math.PI - getMin()[0]) * getRand().nextDouble();
     }
     public Individuo clonar(){return new IndividuoFuncion4b(this);}
 
