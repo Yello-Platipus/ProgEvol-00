@@ -34,4 +34,14 @@ public class SeleccionTorneoAleatoria extends Seleccion{
         }
         return seleccionados;
     }
+
+    @Override
+    public void corregirMinimizar(double max) {
+
+    }
+
+    @Override
+    public void corregirMaximizar(double min) {
+
+    }
 }

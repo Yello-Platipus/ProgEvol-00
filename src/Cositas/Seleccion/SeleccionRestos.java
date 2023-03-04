@@ -47,4 +47,16 @@ public class SeleccionRestos extends Seleccion{
 
         return seleccionados;
     }
+
+    @Override
+    public void corregirMinimizar(double max) {
+        for(int i = 0; i < this.tamPoblacion; i++)
+            this.fitness[i] = (1.05 * max) - this.fitness[i];
+    }
+
+    @Override
+    public void corregirMaximizar(double min) {
+        for(int i = 0; i < this.tamPoblacion; i++)
+            this.fitness[i] = this.fitness[i] + Math.abs(min);
+    }
 }

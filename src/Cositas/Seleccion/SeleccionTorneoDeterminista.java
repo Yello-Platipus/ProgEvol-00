@@ -32,7 +32,16 @@ public class SeleccionTorneoDeterminista  extends Seleccion{
             Collections.sort(aux);
             ret.add(aux.get(0).clonar());
         }
-
         return ret;
+    }
+
+    @Override
+    public void corregirMinimizar(double max) {
+
+    }
+
+    @Override
+    public void corregirMaximizar(double min) {
+
     }
 }
