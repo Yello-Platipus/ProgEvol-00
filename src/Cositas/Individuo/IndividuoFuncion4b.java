@@ -13,29 +13,26 @@ public class IndividuoFuncion4b extends Individuo<Double>{
             min[i] = 0;
             max[i] = Math.PI;
         }
-
+        tamGenes = new int[d];
         this.cromosoma = new Double[d];
         for (int i = 0; i < d; i++) this.cromosoma[i] = this.getRand().nextDouble()*max[0];
     }
 
     public IndividuoFuncion4b(Individuo ind){
         super(ind);
-        int tamTotal = 0;
-        for(int i = 0; i< d; i++)
-            tamTotal += tamGenes[i];
-        this.cromosoma = new Double[tamTotal];
-        for (int i = 0; i < tamTotal; i++)
+
+        this.cromosoma = new Double[ind.getCromosoma().length];
+        tamGenes = new int[cromosoma.length];
+        for (int i = 0; i < cromosoma.length; i++)
             this.cromosoma[i] = (Double) ind.getCromosoma()[i];
     }
-    public IndividuoFuncion4b(Individuo ind, Double[] cromosoma){
-        super(ind, cromosoma);
-    }
+
     public double getValor() {
         double sumatorio = 0;
         for(int i = 0; i < d; i++){
-            sumatorio += Math.sin(cromosoma[i])*Math.pow(Math.sin(((i-1) * Math.pow(cromosoma[i],2))/Math.PI), 2*m);
+            sumatorio -= Math.sin(cromosoma[i])*Math.pow(Math.sin(((i+1) * cromosoma[i]*cromosoma[i])/Math.PI), 2*m);
         }
-        return -sumatorio;
+        return sumatorio;
     }
 
     public double getFitness() {
@@ -68,7 +65,4 @@ public class IndividuoFuncion4b extends Individuo<Double>{
     }
     public Individuo clonar(){return new IndividuoFuncion4b(this);}
 
-    public Individuo getHijo(Double[] cromosoma) {
-        return new IndividuoFuncion4b(this,cromosoma);
-    }
 }

@@ -23,18 +23,19 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
 
     public IndividuoFuncion2(IndividuoFuncion2 ind){
         super(ind);
+        int l = ind.getTamGenes().length;
         int tamTotal = 0;
         this.d = 2;
-        for(int i = 0; i< d; i++)
+        this.tamGenes = new int[l];
+        for(int i = 0; i < l; i++) {
+            this.tamGenes[i] = ind.getTamGenes()[i];
             tamTotal += tamGenes[i];
+        }
         this.cromosoma = new Boolean[tamTotal];
         for (int i = 0; i < tamTotal; i++)
             this.cromosoma[i] = (Boolean) ind.getCromosoma()[i];
     }
 
-    public IndividuoFuncion2(Individuo ind, Boolean[] cromosoma){
-        super(ind, cromosoma);
-    }
 
     public double getValor() {
         double xi[] = new double[d];
@@ -80,7 +81,4 @@ public class IndividuoFuncion2 extends Individuo<Boolean>{
         return new IndividuoFuncion2(this);
     }
 
-    public Individuo getHijo(Boolean[] cromosoma) {
-        return new IndividuoFuncion2(this,cromosoma);
-    }
 }

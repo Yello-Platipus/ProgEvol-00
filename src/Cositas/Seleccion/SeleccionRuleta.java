@@ -26,19 +26,23 @@ public class SeleccionRuleta extends Seleccion{
 
         Collections.sort(poblacion);
         for(int i = 0; i < tamPoblacion; i++){
-            fitness[i] = poblacion.get(0).getFitness();
+            fitness[i] = poblacion.get(i).getFitness();
         }
 
         int q = 1;
-        while(fitness[0] == fitness[q]){
+        do{
+
+            if(fitness[0] < fitness[q])
+                if(fitness[tamPoblacion - 1] > 0)
+                    corregirMinimizar(fitness[tamPoblacion - 1]);
+            else if(fitness[0] > fitness[q])
+                    if(fitness[tamPoblacion - 1] < 0)
+                        corregirMaximizar(fitness[tamPoblacion - 1]);
             q++;
-            if(fitness[0] > fitness[q])
-                corregirMinimizar(fitness[0]);
-            else if(fitness[0] < fitness[q])
-                corregirMaximizar(fitness[0]);
-        }
+        }while(fitness[0] == fitness[q]);
+
         for(int i = 0 ; i < tamPoblacion; i++){
-            fitnessTotal = fitness[i];
+            fitnessTotal += fitness[i];
         }
         for(int i = 0 ; i < tamPoblacion; i++){
             probAcum[i] = fitness[i]/fitnessTotal;
@@ -47,7 +51,7 @@ public class SeleccionRuleta extends Seleccion{
         }
 
         for(int i = 0; i < tamPoblacion; i++){
-            double aleatorio = Math.random() * fitnessTotal;
+            double aleatorio = Math.random();
             for(int j = 0; j < tamPoblacion; j++){
                 if(aleatorio < probAcum[j]){
                     seleccionados.add(poblacion.get(j).clonar());

@@ -26,31 +26,16 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 			this.max[i] = ind.getMax()[i];
 			this.min[i] = ind.getMin()[i];
 		}
-		int sum = 0;
-		for(int i : ind.getTamGenes())
-			sum += 1;
-		this.tamGenes = new int[sum];
-		for(int i = 0; i < sum; i++)
-			this.tamGenes[i] = ind.getTamGenes()[i];
+
 	}
 
-	public Individuo(Individuo ind, T[] cromosoma){
-		this.d = ind.getD();
-		this.max = ind.getMax();
-		this.min = ind.getMin();
-		this.precision = ind.getPrecision();
-		this.cromosoma = cromosoma;
-		this.tamGenes = ind.getTamGenes();
+	protected int[] getTamGenes() { return tamGenes;
 	}
 
-
-	private int[] getTamGenes() { return tamGenes;
+	protected double getPrecision() { return precision;
 	}
 
-	private double getPrecision() { return precision;
-	}
-
-	private int getD() {return d;
+	protected int getD() {return d;
 	}
 
 	public abstract double getFitness();
@@ -90,5 +75,4 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	public abstract T nextRandom();
 
 	public abstract Individuo clonar();
-	public abstract Individuo getHijo(T[] cromosoma);
 }

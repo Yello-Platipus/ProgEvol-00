@@ -24,15 +24,17 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
 
     public IndividuoFuncion4a(IndividuoFuncion4a ind){
         super(ind);
+        int l = ind.getTamGenes().length;
         int tamTotal = 0;
-        for(int i = 0; i< d; i++)
+        this.d = 2;
+        this.tamGenes = new int[l];
+        for(int i = 0; i < l; i++) {
+            this.tamGenes[i] = ind.getTamGenes()[i];
             tamTotal += tamGenes[i];
+        }
         this.cromosoma = new Boolean[tamTotal];
         for (int i = 0; i < tamTotal; i++)
             this.cromosoma[i] = (Boolean) ind.getCromosoma()[i];
-    }
-    public IndividuoFuncion4a(Individuo ind, Boolean[] cromosoma){
-        super(ind, cromosoma);
     }
 
     public double getValor() {
@@ -40,9 +42,9 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
         double sumatorio = 0;
         for(int i = 0; i < d; i++){
             xi[i] = getFenotipo(i);
-            sumatorio += Math.sin(xi[i])*Math.pow(Math.sin(((i-1) * Math.pow(xi[i],2))/Math.PI), 2*m);
+            sumatorio -= Math.sin(xi[i])*Math.pow(Math.sin(((i+1) * Math.pow(xi[i],2))/Math.PI), 2*m);
         }
-        return -sumatorio;
+        return sumatorio;
     }
 
     public double getFitness() {
@@ -78,7 +80,5 @@ public class IndividuoFuncion4a extends Individuo<Boolean>{
         return new IndividuoFuncion4a(this);
     }
 
-    public Individuo getHijo(Boolean[] cromosoma) {
-        return new IndividuoFuncion4a(this,cromosoma);
-    }
+
 }

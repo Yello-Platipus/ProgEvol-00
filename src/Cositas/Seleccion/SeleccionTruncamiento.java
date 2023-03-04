@@ -3,6 +3,7 @@ package Cositas.Seleccion;
 import Cositas.Individuo.Individuo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SeleccionTruncamiento extends Seleccion{
     private double trunc = 0.5;
@@ -13,10 +14,10 @@ public class SeleccionTruncamiento extends Seleccion{
 
     @Override
     public ArrayList<Individuo> seleccionar(ArrayList<Individuo> poblacion, int tamTorneo) {
-        int tamPoblacion = poblacion.size();
+        tamPoblacion = poblacion.size();
         int tamTrunc = (int) (tamPoblacion * trunc);
         ArrayList<Individuo> seleccionados = new ArrayList<>();
-        poblacion.sort(Individuo::compareTo);
+        Collections.sort(poblacion);
         for (int i = 0; i < tamPoblacion; i++) {
             seleccionados.add(poblacion.get(i % tamTrunc).clonar());
         }
